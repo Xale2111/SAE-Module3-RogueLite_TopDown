@@ -60,6 +60,8 @@ public class MapGenerator : MonoBehaviour
         List<SO_RoomType> generatedRooms = new List<SO_RoomType>();
         List<BoundsInt> roomsPositions = new List<BoundsInt>();
         List<SO_BonusRoomType> generatedBonusRooms = new List<SO_BonusRoomType>();
+        List<BoundsInt> bonusRoomsPositions = new List<BoundsInt>();
+        
         
         BonusRoomPosition bonusRoomPosition = (BonusRoomPosition) Random.Range(0,2);
         
@@ -93,6 +95,9 @@ public class MapGenerator : MonoBehaviour
             roomsPositions.Add(roomBounds);;
             spaceBetweenRooms += size.x + CORRIDOR_LENGTH;
             
+            //TODO : Add ID to the room. This need to be NOT NULL and UNIQUE.
+            //CHECK how to do that 
+            
             //Drawing rooms
             DrawArea(floorMap,floorTile,roomCenter,size);
             DrawArea(wallsMap,wallsTile,roomCenter,size);
@@ -116,7 +121,9 @@ public class MapGenerator : MonoBehaviour
                         break;
                 }
                 generatedBonusRooms[i].position = bonusRoomPosition;
-                generatedBonusRooms[i].center = bonusRoomCenter;
+                BoundsInt bonusRoomBounds = new BoundsInt(new Vector3Int(bonusRoomCenter.x,bonusRoomCenter.y,0),new Vector3Int(bonusRoomSize.x,bonusRoomSize.y,0)); 
+                
+                bonusRoomsPositions.Add(bonusRoomBounds);
                 bonusRoomPosition = (BonusRoomPosition) Random.Range(0,2);
                 
                 DrawArea(floorMap, floorTile, bonusRoomCenter, bonusRoomSize);
@@ -125,35 +132,36 @@ public class MapGenerator : MonoBehaviour
             
         }
 
-        for (int i = 0; i < generatedRooms.Count - 1; i++)
-        {
-            Debug.Log($"Drawing Room. Center: {generatedRooms[i].center}");
-        }
-
         for (int i = 0; i < roomsPositions.Count-1; i++)
         {
+            //TODO : Add ID to the corridor based on the room (ID is based on the room before the corridor)
             Corridor corridor = new Corridor();
             switch (generatedRooms[i+1].sizeType.name)
             {
                 case RoomSizeName.Large:
                     corridor.width = largeCorridorSize.y;
-                    
-                    corridor.start = Vector3Int.RoundToInt(roomsPositions[i].x) - new Vector3Int(0,largeCorridorSize.y,0);
-                    corridor.end = Vector3Int.RoundToInt(roomsPositions[i+1].center) - new Vector3Int(0,largeCorridorSize.y,0);
+                    corridor.start = new Vector3Int(roomsPositions[i].x,roomsPositions[i].y/2,0) - new Vector3Int(0,largeCorridorSize.y/2,0);
+                    corridor.end = new Vector3Int(roomsPositions[i+1].x,roomsPositions[i+1].y/2,0) - new Vector3Int(0,largeCorridorSize.y/2,0);
                     break;
                 case RoomSizeName.Small:
                 case RoomSizeName.Medium:
                 default:
                     corridor.width = smallCorridorWidth.y;
-                    //Debug.Log($"Drawing Corridor. Start Center: {generatedRooms[i].center} / End Center: {generatedRooms[i+1].center}");
-                    corridor.start = Vector3Int.RoundToInt(roomsPositions[i].center) - new Vector3Int(0,smallCorridorWidth.y,0);
-                    corridor.end = Vector3Int.RoundToInt(roomsPositions[i+1].center) - new Vector3Int(0,smallCorridorWidth.y,0);
+                    corridor.start = new Vector3Int(roomsPositions[i].x,roomsPositions[i].y/2,0) - new Vector3Int(0,smallCorridorWidth.y/2,0);
+                    corridor.end = new Vector3Int(roomsPositions[i+1].x,roomsPositions[i+1].y/2,0) - new Vector3Int(0,smallCorridorWidth.y/2,0);
                     break;
             }
             corridor.type = CorridorType.Horizontal;
             corridors.Add(corridor);
         }
-        
+
+        for (int i = 0; i < bonusRoomsPositions.Count - 1; i++)
+        {
+            Corridor corridor = new Corridor();
+            corridor.width = bonusRoomCorridorSize.x;
+            //Compare corridor ID with the room ID. 
+        }
+
         foreach (var corridor in corridors)
         {
             DrawNextCorridor();
