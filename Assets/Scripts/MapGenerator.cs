@@ -57,8 +57,8 @@ public class MapGenerator : MonoBehaviour
         ClearAll();
         corridors.Clear();
         
-        List<SO_RoomType> generatedRoomTypes = new List<SO_RoomType>();
-        List<RoomInstance> generatedRooms = new List<RoomInstance>(); // Nouvelle liste
+        List<SO_RoomType> generatedRooms = new List<SO_RoomType>();
+        List<BoundsInt> roomsPositions = new List<BoundsInt>();
         List<SO_BonusRoomType> generatedBonusRooms = new List<SO_BonusRoomType>();
         
         BonusRoomPosition bonusRoomPosition = (BonusRoomPosition) Random.Range(0,2);
@@ -69,31 +69,28 @@ public class MapGenerator : MonoBehaviour
         //Spawn HUB, then spawn rooms
         for (int i = 0; i < generatedMaxBaseRooms; i++)
         {
-            generatedRoomTypes.Add(currentRoom);
+            generatedRooms.Add(currentRoom);
             currentRoom = currentRoom.NextRoom();
         }
 
-        generatedRoomTypes.Add(endRoom);
+        generatedRooms.Add(endRoom);
 
-        foreach (var room in generatedRoomTypes)
+        foreach (var room in generatedRooms)
         {
             generatedBonusRooms.Add(room.BonusRoom());
         }
         
-        foreach (var roomType in generatedRoomTypes)
-        {
-            generatedRooms.Add(new RoomInstance(roomType));
-        }
-        
         //Drawing rooms
-        int spaceBetweenRooms = 0;
+        int spaceBetweenRooms = 0;  //Space between the center of the last room to the left border of the new one
+        //loop
         for (int i = 0; i < generatedRooms.Count; i++)
         {
             //stock room size
-            Vector2Int size = generatedRooms[i].size;
+            Vector2Int size = generatedRooms[i].GetSize();
             //stock room center
             Vector2Int roomCenter = new Vector2Int(spaceBetweenRooms+size.x/2,0);
-            generatedRooms[i].center = roomCenter; // Maintenant ça persistera !
+            BoundsInt roomBounds = new BoundsInt(new Vector3Int(roomCenter.x,roomCenter.y,0),new Vector3Int(size.x,size.y,0)); 
+            roomsPositions.Add(roomBounds);;
             spaceBetweenRooms += size.x + CORRIDOR_LENGTH;
             
             //Drawing rooms
@@ -133,24 +130,24 @@ public class MapGenerator : MonoBehaviour
             Debug.Log($"Drawing Room. Center: {generatedRooms[i].center}");
         }
 
-        for (int i = 0; i < generatedRooms.Count-1; i++)
+        for (int i = 0; i < roomsPositions.Count-1; i++)
         {
             Corridor corridor = new Corridor();
-            switch (generatedRooms[i+1].roomType.sizeType.name)
+            switch (generatedRooms[i+1].sizeType.name)
             {
                 case RoomSizeName.Large:
                     corridor.width = largeCorridorSize.y;
                     
-                    corridor.start = generatedRooms[i].center - new Vector2Int(0,largeCorridorSize.y/2);
-                    corridor.end = generatedRooms[i+1].center- new Vector2Int(0,largeCorridorSize.y/2);
+                    corridor.start = Vector3Int.RoundToInt(roomsPositions[i].x) - new Vector3Int(0,largeCorridorSize.y,0);
+                    corridor.end = Vector3Int.RoundToInt(roomsPositions[i+1].center) - new Vector3Int(0,largeCorridorSize.y,0);
                     break;
                 case RoomSizeName.Small:
                 case RoomSizeName.Medium:
                 default:
                     corridor.width = smallCorridorWidth.y;
                     //Debug.Log($"Drawing Corridor. Start Center: {generatedRooms[i].center} / End Center: {generatedRooms[i+1].center}");
-                    corridor.start = generatedRooms[i].center - new Vector2Int(0,smallCorridorWidth.y/2);
-                    corridor.end = generatedRooms[i+1].center- new Vector2Int(0,smallCorridorWidth.y/2);
+                    corridor.start = Vector3Int.RoundToInt(roomsPositions[i].center) - new Vector3Int(0,smallCorridorWidth.y,0);
+                    corridor.end = Vector3Int.RoundToInt(roomsPositions[i+1].center) - new Vector3Int(0,smallCorridorWidth.y,0);
                     break;
             }
             corridor.type = CorridorType.Horizontal;
@@ -202,7 +199,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    private void DrawCorridor(Tilemap map, TileBase tile, Vector2Int start, Vector2Int end, int width,
+    private void DrawCorridor(Tilemap map, TileBase tile, Vector3Int start, Vector3Int end, int width,
         CorridorType type)
     {
         int length = 0;

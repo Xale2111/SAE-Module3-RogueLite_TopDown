@@ -8,8 +8,8 @@ public enum CorridorType
 
 public struct Corridor
 {
-    public Vector2Int start;
-    public Vector2Int end;
+    public Vector3Int start;
+    public Vector3Int end;
     public int width;
     public CorridorType type;
     public bool isBonus;
