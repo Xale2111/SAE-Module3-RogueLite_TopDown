@@ -15,8 +15,12 @@ MonoBehaviour:
   type: 0
   sizeType: {fileID: 11400000, guid: 30163912b89a986489f4c71fb8d78481, type: 2}
   name: HUB
+  center: {x: 5, y: 0}
   Links:
   - Weight: 7
     soRoom: {fileID: 11400000, guid: 5d7513fb5119704458b677e8a132577f, type: 2}
   - Weight: 3
     soRoom: {fileID: 11400000, guid: c036bbb95cdd4554098bbfee9a30e23e, type: 2}
+  BonusRoomLinks:
+  - Weight: 10
+    soRoom: {fileID: 11400000, guid: 5932d12f8b8a6f24fb8f85f7fbb04960, type: 2}

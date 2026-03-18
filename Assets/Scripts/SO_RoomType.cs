@@ -7,9 +7,9 @@ namespace Rooms
     public enum RoomType
     {
         Default,
-        GoldMaxxing,
+        Chest,
         Merchant,
-        StatUpgrade
+        WeaponUpgrade
     }
      
     [System.Serializable]
@@ -17,16 +17,18 @@ namespace Rooms
         public float Weight;
         public SO_RoomType soRoom;
     }
+    
+    [System.Serializable]
+    public struct BonusLink{
+        public float Weight;
+        public SO_BonusRoomType soRoom;
+    }
 
     [CreateAssetMenu(fileName = "RoomType", menuName = "Rooms/RoomType", order = 0)]
-    public class SO_RoomType : ScriptableObject
+    public class SO_RoomType : SO_Room
     {
-        public RoomType type;
-        public SO_RoomSizeType sizeType;   
-        public string name;
-        
         public List<Link> Links;
-        public List<Link> BonusRoomLinks;
+        public List<BonusLink> BonusRoomLinks;
         
         public SO_RoomType NextRoom()
         {
@@ -42,20 +44,39 @@ namespace Rooms
                     rngSum += link.Weight;
                 }
             }
-
             return null;
         }
 
-        public SO_RoomType BonusRoom()
+        public SO_BonusRoomType BonusRoom()
         {
+            //Pick a random number between 0 and 10
+            //if number <= bonus room weight 1 -> bonus room 1
+            //else if number <= bonus room weight 1+2 -> bonus room 2
+            // else -> no bonus room
+
+            if (BonusRoomLinks.Count > 0)
+            {
+                
+                float random = Random.Range(0, 10);
+
+                int i = 0;
+                
+                float cumultativeWeight = 0;
+                foreach (var bonusRoomLink in BonusRoomLinks)
+                {
+                    if (random  < bonusRoomLink.Weight + cumultativeWeight)
+                    {
+                        return bonusRoomLink.soRoom;
+                        i++;
+                    }
+                    cumultativeWeight += bonusRoomLink.Weight;
+                }
+            }
+            
             return null;
         }
 
-        public Vector2Int GetSize()
-        {
-            return sizeType.GetSize();
-        }
-        
+       
     }
     
     

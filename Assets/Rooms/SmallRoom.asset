@@ -22,3 +22,8 @@ MonoBehaviour:
     soRoom: {fileID: 11400000, guid: c036bbb95cdd4554098bbfee9a30e23e, type: 2}
   - Weight: 1
     soRoom: {fileID: 11400000, guid: a03ae84a18fdf6f4b940786f224f020c, type: 2}
+  BonusRoomLinks:
+  - Weight: 2
+    soRoom: {fileID: 11400000, guid: 245e338088c165645aea306562146a4c, type: 2}
+  - Weight: 1
+    soRoom: {fileID: 11400000, guid: 5932d12f8b8a6f24fb8f85f7fbb04960, type: 2}

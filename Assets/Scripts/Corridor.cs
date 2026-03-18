@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 
-public enum CorridorType { Horizontal, Vertical }
-
-public enum CorridorSize
+public enum CorridorType
 {
-    Small,Large,Boss
+    Horizontal,
+    Vertical
 }
 
 public struct Corridor
 {
     public Vector2Int start;
+    public Vector2Int end;
+    public int width;
     public CorridorType type;
-    public CorridorSize size;
+    public bool isBonus;
 }
