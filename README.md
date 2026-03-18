@@ -2,8 +2,12 @@
 
 Utilisation du procédural : Dans l'éditeur, cliquer sur MapGenerator -> Generate Map. Il faut dézoom un peu dans la scène pour bien voir tout le niveau. Pour l'instant, il y a 10 (sans compter le hub, la salle de boss et les salles bonus)
 
-Feuille de route :
-1. 
+Feuille de route (PCG) :
+1. Finir la génération des donjons
+2. afficher un placeholder dans les salles bonus
+3. Placer une salle marchand avant le boss
+4. Placer une salle marchand vers le niveau du donjon s'il y a plus de 8 salles dans le donjon
+5. (Optionnel : Ajout du décor dans les salles)
 
 Objectifs :
 - Commencer avec 3-4 salles.
