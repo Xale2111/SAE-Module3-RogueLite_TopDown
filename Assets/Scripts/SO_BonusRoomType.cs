@@ -2,6 +2,12 @@
 
 namespace Rooms
 {
+    public struct BonusRoom
+    {
+        public BoundsInt bounds;
+        public int connectedRoomId;
+    }
+    
     public enum BonusRoomPosition
     {
         Under,

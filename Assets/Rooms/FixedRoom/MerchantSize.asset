@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb01c511b50e44d39b01b2fca01ed83c, type: 3}
   m_Name: MerchantSize
   m_EditorClassIdentifier: Assembly-CSharp::Rooms.SO_RoomSizeType
-  minSize: {x: 15, y: 9}
-  maxSize: {x: 15, y: 9}
+  minSize: {x: 9, y: 17}
+  maxSize: {x: 9, y: 17}
   name: 1

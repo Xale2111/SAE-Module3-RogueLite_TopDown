@@ -21,12 +21,12 @@ public class MapGenerator_Editor : Editor
         
         EditorGUILayout.Space(10);
         EditorGUILayout.Separator();
-       /* GUI.backgroundColor = new Color(0.2f,0.8f,0.2f);
-        if (GUILayout.Button("Draw Map with corridors"))
+       GUI.backgroundColor = new Color(0.0f,0.8f,0.0f);
+        if (GUILayout.Button("Draw next corridor"))
         {
-            mapGenerator.GenerateMapWithAllCorridors();
+            mapGenerator.DrawNextCorridor();
         }
-        */
+       
         EditorGUILayout.Space(10);
         EditorGUILayout.Separator();
         GUI.backgroundColor = new Color(0.8f,0.2f,0.2f);
