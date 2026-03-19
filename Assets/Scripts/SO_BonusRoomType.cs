@@ -6,6 +6,7 @@ namespace Rooms
     {
         public BoundsInt bounds;
         public int connectedRoomId;
+        public SO_BonusRoomType BonusRoomType;
     }
     
     public enum BonusRoomPosition

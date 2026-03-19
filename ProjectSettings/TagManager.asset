@@ -47,6 +47,9 @@ TagManager:
   - name: Ground
     uniqueID: 2353535797
     locked: 0
+  - name: WeaponPickUp
+    uniqueID: 470425713
+    locked: 0
   - name: PlayerArms
     uniqueID: 2484978889
     locked: 0
