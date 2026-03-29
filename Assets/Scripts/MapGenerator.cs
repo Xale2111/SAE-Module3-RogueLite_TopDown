@@ -36,6 +36,7 @@ public class MapGenerator : MonoBehaviour
     
     [Header("Bonus room objects")] [Space(15)]
     [SerializeField] private GameObject weaponPickUpPrefab;
+    [SerializeField] private GameObject chestPickUpPrefab;
     
     private RoomManager roomManager;
     private List<Corridor> corridors = new List<Corridor>();
@@ -206,7 +207,7 @@ public class MapGenerator : MonoBehaviour
             switch (bonusRoom.BonusRoomType.type)
             {
                 case RoomType.Chest :
-                    bonusObject = Instantiate(weaponPickUpPrefab, bonusRoom.bounds.center-new Vector3(0,0.5f,0), Quaternion.identity);
+                    bonusObject = Instantiate(chestPickUpPrefab, bonusRoom.bounds.center-new Vector3(0,0.5f,0), Quaternion.identity);
                     break;
                 case RoomType.WeaponUpgrade:
                     default:
