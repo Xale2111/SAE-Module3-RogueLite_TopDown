@@ -45,8 +45,7 @@ public class MapGenerator : MonoBehaviour
     List<BoundsInt> roomsPositions = new List<BoundsInt>();
     List<GameObject> bonusRoomObjects = new List<GameObject>();
     
-    private int currentCorridor = 0;
-    private int roomIdCounter = 0;
+    private int currentCorridor = 0;    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -59,10 +58,11 @@ public class MapGenerator : MonoBehaviour
         floorMap.ClearAllTiles();
         wallsMap.ClearAllTiles();
         bonusRooms.Clear();
-        roomsPositions.Clear();
+        roomsPositions.Clear();        
+
         foreach (GameObject bonusRoomObject in bonusRoomObjects)
         {
-            DestroyImmediate(bonusRoomObject);
+            DestroyImmediate(bonusRoomObject.gameObject);
         }
         bonusRoomObjects.Clear();
         currentCorridor = 0;
@@ -109,9 +109,7 @@ public class MapGenerator : MonoBehaviour
             BoundsInt roomBounds = new BoundsInt(new Vector3Int(spaceBetweenRooms,0,0),new Vector3Int(size.x,size.y,0)); 
             roomBounds.SetCenter(new Vector3Int(spaceBetweenRooms+size.x/2,0,0));
             roomsPositions.Add(roomBounds);
-            spaceBetweenRooms += size.x + CORRIDOR_LENGTH;
-            
-            roomIdCounter++;
+            spaceBetweenRooms += size.x + CORRIDOR_LENGTH;                      
             
             //Drawing rooms
             DrawArea(floorMap,floorTile,roomBounds);

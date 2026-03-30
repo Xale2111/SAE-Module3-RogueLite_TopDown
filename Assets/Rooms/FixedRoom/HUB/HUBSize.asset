@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb01c511b50e44d39b01b2fca01ed83c, type: 3}
   m_Name: HUBSize
   m_EditorClassIdentifier: Assembly-CSharp::Rooms.SO_RoomSizeType
-  minSize: {x: 11, y: 11}
-  maxSize: {x: 11, y: 11}
+  minSize: {x: 7, y: 7}
+  maxSize: {x: 7, y: 7}
   name: 0
