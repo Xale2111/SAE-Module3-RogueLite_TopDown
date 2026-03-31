@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ShieldAndSpear
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   weaponPrefab: {fileID: 2385488489582914356, guid: 4c460ca0cdd285549b7ce947c50f63cd, type: 3}
+  pickUpSprite: {fileID: -7446738972509449758, guid: bfdc58cf20ffd304b906fca3cedf0652, type: 3}
   name: Shield and Spear
   animator: {fileID: 0}

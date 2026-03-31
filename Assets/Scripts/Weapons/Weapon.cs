@@ -1,27 +1,33 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Weapon", menuName = "Weapons")]
-public class Weapon : ScriptableObject
+public class Weapon : MonoBehaviour
 {
-    [SerializeField] GameObject weaponPrefab;
-    public string name;
-    [SerializeField] Animator animator;
+    public Weapon_SO WeaponData;
+    public int BaseDamage;
+    public int Level;
+    [SerializeField] protected float coolDown;
+
+    protected Animator animator;
+
+    private void OnEnable()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public Weapon Equip(Transform parent)
     {
-        Instantiate(weaponPrefab, parent);
+        Instantiate(this, parent);
         return this;
     }
 
     //Main Attack
-    public virtual void LeftClick() {
-        Debug.Log("Main attack with : " + name);
+    public virtual void LeftClick()
+    {        
     }
 
 
     //Second Attack
-    public virtual void RightClick() {
-        Debug.Log("Second attack with : " + name);
+    public virtual void RightClick()
+    {        
     }
-
 }

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: DoubleAxe
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   weaponPrefab: {fileID: 1436711536180364239, guid: c7c6d7d2bffda474fa8efe39a6765807, type: 3}
+  pickUpSprite: {fileID: -1434994175182662533, guid: 588b967dbc6868e43867e1510ed36558, type: 3}
   name: Double Axe
   animator: {fileID: 0}

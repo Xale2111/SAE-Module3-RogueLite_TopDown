@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     Vector2 move;
+
+    public bool Interacted =false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,5 +35,18 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         move = context.ReadValue<Vector2>();        
-    }    
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.ReadValueAsButton())
+        {
+            Interacted = true;
+            Debug.Log("Interact");
+        }
+        else
+        {
+            Interacted = false;
+        }
+    }
 }

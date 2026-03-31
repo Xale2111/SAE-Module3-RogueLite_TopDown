@@ -100,6 +100,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3003863655884914421}
+  - component: {fileID: 585828676491801704}
+  - component: {fileID: 6546382968230424266}
   m_Layer: 0
   m_Name: DoubleAxe
   m_TagString: Untagged
@@ -115,7 +117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436711536180364239}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.79335314, w: 0.6087617}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7933534, w: 0.6087614}
   m_LocalPosition: {x: 1, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -125,6 +127,44 @@ Transform:
   - {fileID: 3573657028073970926}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -105}
+--- !u!114 &585828676491801704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436711536180364239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0412604aeaf7004f88aaa30c3efb41d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoubleAxe
+  WeaponData: {fileID: 11400000, guid: 532933d5ca2d0a24e92f838568ddde69, type: 2}
+  BaseDamage: 0
+  Level: 0
+  coolDown: 0
+--- !u!95 &6546382968230424266
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436711536180364239}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a95cd263dfb0b74bb316c982ad0db85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4687176676842265807
 GameObject:
   m_ObjectHideFlags: 0

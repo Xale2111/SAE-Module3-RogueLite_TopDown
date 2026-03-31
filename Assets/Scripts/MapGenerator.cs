@@ -12,8 +12,7 @@ public class MapGenerator : MonoBehaviour
 {
     private const int CORRIDOR_LENGTH = 9;
     private const int BONUS_CORRIDOR_LENGTH = 7;
-    
-    [SerializeField] Vector2Int grassSize;
+       
     [SerializeField] private int generatedMaxBaseRooms = 4;
     
     [Header("Floor")] [Space(10)] 

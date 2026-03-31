@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: DoubleDagger
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   weaponPrefab: {fileID: 8140976949592208329, guid: 583d5cd58210ec74ebbfeb1fb5d4d122, type: 3}
-  name: Bouble Dagger
+  pickUpSprite: {fileID: 5069062607758196523, guid: 517bf97da076f674b92bf1e7a481f08c, type: 3}
+  name: Double Dagger
+  damage: 0
+  level: 0
   animator: {fileID: 0}

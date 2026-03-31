@@ -1,0 +1,32 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="WeaponCardInfo" data-source-type="Weapon, Assembly-CSharp" data-source="" style="flex-grow: 0; background-color: rgba(55, 55, 55, 0); background-position-x: left 0; background-position-y: top 0; -unity-background-scale-mode: stretch-to-fill; width: 18%; height: 40%; background-image: url(&quot;project://database/Assets/00-Imports/00-ScribbleAsset/PNG/Default%20(64px)/path.png?fileID=21300000&amp;guid=820fe60ecb157874892353cc4593d548&amp;type=3#path&quot;); background-repeat: no-repeat no-repeat; flex-shrink: 0; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; opacity: 1;">
+        <ui:Label text="" name="WeaponName" double-click-selects-word="false" display-tooltip-when-elided="false" triple-click-selects-line="false" data-source-type="Weapon, Assembly-CSharp" style="font-size: 16%; -unity-font-definition: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&amp;guid=74a5091d8707f334b9a5c31ef71a64ba&amp;type=3#PerfectDOSVGA437&quot;); -unity-text-align: upper-center; flex-shrink: 1; -unity-font-style: bold-and-italic;">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="WeaponData.name" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:Label>
+        <ui:Image data-source="" data-source-path="" source="" name="WeaponSprite" style="justify-content: flex-start; align-self: center; align-content: flex-start; margin-top: 20px; margin-right: auto; margin-bottom: 1px; margin-left: auto; width: 70%; height: auto; aspect-ratio: 1; -unity-background-image-tint-color: rgb(255, 121, 121);">
+            <Bindings>
+                <ui:DataBinding property="source" data-source-path="WeaponData.pickUpSprite" data-source-type="Weapon, Assembly-CSharp" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:Image>
+        <ui:VisualElement name="Datas" style="flex-grow: 1; -unity-background-image-tint-color: rgb(255, 255, 255); width: 70%; height: 100%; margin-top: auto; margin-right: auto; margin-bottom: auto; margin-left: auto; background-color: rgb(214, 214, 214); border-top-left-radius: 16px; border-top-right-radius: 16px; border-bottom-right-radius: 16px; border-bottom-left-radius: 16px;">
+            <ui:VisualElement name="Level" style="flex-grow: 1; background-size: 100% 40%; height: 40%; width: 100%; background-color: rgba(255, 255, 255, 0); align-items: center; justify-content: center; flex-direction: row;">
+                <ui:Label text="LVL" name="LevelLabel" double-click-selects-word="false" display-tooltip-when-elided="false" triple-click-selects-line="false" style="font-size: 20%; -unity-font-definition: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&amp;guid=74a5091d8707f334b9a5c31ef71a64ba&amp;type=3#PerfectDOSVGA437&quot;);"/>
+                <ui:Label text="" name="LevelText" double-click-selects-word="false" display-tooltip-when-elided="false" triple-click-selects-line="false" style="font-size: 20%; -unity-font-definition: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&amp;guid=74a5091d8707f334b9a5c31ef71a64ba&amp;type=3#PerfectDOSVGA437&quot;);">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="Level" data-source-type="Weapon, Assembly-CSharp" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+            <ui:VisualElement name="Damage" style="flex-grow: 1; background-size: 100% 40%; height: 40%; width: 100%; background-color: rgba(255, 255, 255, 0); justify-content: center; align-self: center; align-items: center; flex-direction: row;">
+                <ui:Label text="DMG&#10;" name="DamageLabel" double-click-selects-word="false" display-tooltip-when-elided="false" triple-click-selects-line="false" style="font-size: 20%; -unity-font-definition: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&amp;guid=74a5091d8707f334b9a5c31ef71a64ba&amp;type=3#PerfectDOSVGA437&quot;);"/>
+                <ui:Label text="" name="DamageText" double-click-selects-word="false" display-tooltip-when-elided="false" triple-click-selects-line="false" style="font-size: 20%; -unity-font-definition: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&amp;guid=74a5091d8707f334b9a5c31ef71a64ba&amp;type=3#PerfectDOSVGA437&quot;);">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="BaseDamage" data-source-type="Weapon, Assembly-CSharp" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4574602290b5d4343a33b40119bb8ad3, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  weaponPrefab: {fileID: 1792168506874467101, guid: 5035481192dff374d9ba53843b317cc3, type: 3}
+  pickUpSprite: {fileID: -7856493677412862020, guid: 46492f1ef1073cf459a6512926efc4bf, type: 3}
   name: Bow
   animator: {fileID: 0}
