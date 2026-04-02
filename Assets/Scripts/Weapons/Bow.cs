@@ -7,7 +7,7 @@ public class Bow : Weapon
     {
         if (animator)
         { 
-            animator.SetBool("MainAttack",true);
+            animator.SetTrigger("MainAttack");
         }
         Debug.Log("First attack BOW");        
     }
@@ -16,7 +16,7 @@ public class Bow : Weapon
     {
         if (animator)
         {
-            animator.SetBool("SecondAttack", true);
+            animator.SetTrigger("SecondAttack");
         }
         Debug.Log("Second attack BOW");
     }

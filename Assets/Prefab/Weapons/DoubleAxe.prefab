@@ -143,6 +143,7 @@ MonoBehaviour:
   BaseDamage: 0
   Level: 0
   coolDown: 0
+  animator: {fileID: 6546382968230424266}
 --- !u!95 &6546382968230424266
 Animator:
   serializedVersion: 7
@@ -156,7 +157,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 6a95cd263dfb0b74bb316c982ad0db85, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0

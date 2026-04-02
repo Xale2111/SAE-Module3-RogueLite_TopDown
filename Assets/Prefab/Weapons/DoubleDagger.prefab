@@ -207,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 4427371794729392940}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.86602515, w: 0.5000004}
-  m_LocalPosition: {x: 1.1285641, y: -1.25, z: 0}
+  m_LocalPosition: {x: 1.15, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -422,7 +422,7 @@ Transform:
   m_GameObject: {fileID: 7580621387838879722}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.86602545, w: 0.49999994}
-  m_LocalPosition: {x: -1.15, y: -1.2, z: 0}
+  m_LocalPosition: {x: -1.15, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -440,6 +440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5671908690267216602}
   - component: {fileID: -5943724394105765793}
+  - component: {fileID: 7465237384428354640}
   m_Layer: 0
   m_Name: DoubleDagger
   m_TagString: Untagged
@@ -456,7 +457,7 @@ Transform:
   m_GameObject: {fileID: 8140976949592208329}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -479,3 +480,27 @@ MonoBehaviour:
   WeaponData: {fileID: 11400000, guid: 79095b9197183d64c902fe76d0f35518, type: 2}
   BaseDamage: 0
   Level: 0
+  coolDown: 0
+  animator: {fileID: 7465237384428354640}
+--- !u!95 &7465237384428354640
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8140976949592208329}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f8797d99441b3c4cab41824aac518ce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

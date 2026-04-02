@@ -39,9 +39,8 @@ public class WeaponManager : MonoBehaviour
 
     public Weapon GetRandomWeapon()
     {
-        Weapon newWeapon = new Weapon();
-        newWeapon = possibleWeapons[Random.Range(0, possibleWeapons.Length)];        
-
+        var newWeapon = possibleWeapons[Random.Range(0, possibleWeapons.Length)];
+        
         return newWeapon;
     }
 
@@ -49,7 +48,7 @@ public class WeaponManager : MonoBehaviour
     {
         Destroy(transform.GetChild(0).gameObject);
 
-        CurrentWeapon.Equip(transform);
+        CurrentWeapon = CurrentWeapon.Equip(transform);
 
     }
 

@@ -4,13 +4,13 @@ public class DoubleAxe : Weapon
 {
     public override void LeftClick()
     {
-        animator.SetBool("MainAttack", true);
+        animator.SetTrigger("MainAttack");
         Debug.Log("First attack Double Axe");
     }
 
     public override void RightClick()
     {
-        animator.SetBool("SecondAttack", true);
+        animator.SetTrigger("SecondAttack");
         Debug.Log("Second attack Double Axe");
     }
 }

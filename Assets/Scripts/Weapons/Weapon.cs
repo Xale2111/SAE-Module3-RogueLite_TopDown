@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -7,17 +8,12 @@ public class Weapon : MonoBehaviour
     public int Level;
     [SerializeField] protected float coolDown;
 
-    protected Animator animator;
-
-    private void OnEnable()
-    {
-        animator = GetComponent<Animator>();
-    }
+    [SerializeField] protected Animator animator;
 
     public Weapon Equip(Transform parent)
     {
-        Instantiate(this, parent);
-        return this;
+        Weapon instance = Instantiate(this, parent);
+        return instance;
     }
 
     //Main Attack

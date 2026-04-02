@@ -25,10 +25,7 @@ public class WeaponPickUp : InteractItem
 
     public override void OnPickUp()
     {
-        Weapon newPlayerWeapon = weapon;
-        weapon = weaponManager.CurrentWeapon;
-
-        weaponManager.CurrentWeapon = newPlayerWeapon;        
+        (weapon, weaponManager.CurrentWeapon) = (weaponManager.CurrentWeapon, weapon);
         weaponDocument.rootVisualElement.dataSource = weapon;
         spriteRenderer.sprite = weapon.WeaponData.pickUpSprite;
         weaponManager.EquipCurrentWeapon();
