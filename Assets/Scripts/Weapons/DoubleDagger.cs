@@ -7,7 +7,7 @@ public class DoubleDagger : Weapon
     
     public override void LeftClick()
     {
-        animator.SetBool("AttackingDagger", attackingDagger);
+        animator.SetBool("AttackingHand", attackingDagger);
         animator.SetTrigger("MainAttack");
         attackingDagger = !attackingDagger;
         Debug.Log("First attack Double Dagger");
