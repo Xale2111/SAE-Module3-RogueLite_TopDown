@@ -10,10 +10,10 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] protected Animator animator;
 
-    public Weapon Equip(Transform parent)
+    public Weapon Equip()
     {
-        Weapon instance = Instantiate(this, parent);
-        return instance;
+        this.gameObject.SetActive(true);
+        return this;
     }
 
     //Main Attack
@@ -21,6 +21,9 @@ public class Weapon : MonoBehaviour
     {        
     }
 
+    public virtual void ReleaseLeftClick()
+    {
+    }
 
     //Second Attack
     public virtual void RightClick()

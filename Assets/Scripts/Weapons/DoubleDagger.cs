@@ -1,15 +1,15 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DoubleDagger : Weapon
 {
-    private bool attackingDagger = false; //False = left hand, True = right hand 
-    
+    private bool hand;
     public override void LeftClick()
     {
-        animator.SetBool("AttackingDagger", attackingDagger);
+        hand = Random.value < 0.5f ? true : false;
+        animator.SetBool("AttackingHand", hand);
         animator.SetTrigger("MainAttack");
-        attackingDagger = !attackingDagger;
         Debug.Log("First attack Double Dagger");
     }
 
