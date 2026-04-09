@@ -1,28 +1,30 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Enemy))]
 public class Context : MonoBehaviour
 {
+    [SerializeField] private Enemy_SO _enemyStat;
+
+    //[SerializeField] private FsmLeader _leader;
+    
     private PlayerController _player;
     public Transform GetPlayerTransform() => _player.transform;
     
     public Transform SelfTransform => transform;
-    public Rigidbody2D SelfRigidbody => GetComponent<Rigidbody2D>();
+    
+    private Rigidbody2D _rigidbody;
+    
+    public Rigidbody2D SelfRigidbody => _rigidbody;
 
     private RoomManager _roomManager;
     public BoundsInt GetRoomBounds() => _roomManager.CurrentRoomBounds();
-    
-    private Transform _leader;
-    
-    public Transform GetLeaderTransform() => _leader.transform;
 
-    private Enemy _enemy;
-    public Enemy GetEnemy() => _enemy;
-    
+
+    public Enemy_SO EnemyStat => _enemyStat;
+
     public void MoveTo(Vector3 direction)
     {
-        SelfRigidbody.linearVelocity = direction.normalized * _enemy.MoveSpeed;
+        SelfRigidbody.linearVelocity = direction.normalized * _enemyStat.MoveSpeed;
         
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         SelfRigidbody.MoveRotation(angle);
@@ -30,8 +32,12 @@ public class Context : MonoBehaviour
 
     private void OnEnable()
     {
+        _rigidbody = GetComponent<Rigidbody2D>();
         _player = FindFirstObjectByType<PlayerController>();
         _roomManager = FindFirstObjectByType<RoomManager>();
-        _enemy = GetComponent<Enemy>();
+        if (!_enemyStat)
+        {
+            _enemyStat = GetComponent<Enemy_SO>();
+        }
     }
 }
