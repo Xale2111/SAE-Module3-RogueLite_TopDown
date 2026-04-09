@@ -471,6 +471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Brain
   actions:
   - {fileID: 11400000, guid: 1c7d47cbb7d1f664188992cfb281a83e, type: 2}
+  - {fileID: 11400000, guid: 697cb9bebdfbe654cb004d3daafe1625, type: 2}
 --- !u!114 &312497294
 MonoBehaviour:
   m_ObjectHideFlags: 0
