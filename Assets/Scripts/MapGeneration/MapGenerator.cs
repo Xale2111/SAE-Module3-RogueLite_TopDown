@@ -35,13 +35,12 @@ public class MapGenerator : MonoBehaviour
     
     [Header("Bonus room objects")] [Space(15)]
     [SerializeField] private GameObject weaponPickUpPrefab;
-    [SerializeField] private GameObject chestPickUpPrefab;
-    
-    private RoomManager roomManager;
+    [SerializeField] private GameObject chestPickUpPrefab; 
+        
     private List<Corridor> corridors = new List<Corridor>();
     
     List<BonusRoom> bonusRooms = new List<BonusRoom>();
-    List<BoundsInt> roomsPositions = new List<BoundsInt>();
+    List<NormalRoom> normalRooms = new List<NormalRoom>();
     List<GameObject> bonusRoomObjects = new List<GameObject>();
     
     private int currentCorridor = 0;    
@@ -57,7 +56,7 @@ public class MapGenerator : MonoBehaviour
         floorMap.ClearAllTiles();
         wallsMap.ClearAllTiles();
         bonusRooms.Clear();
-        roomsPositions.Clear();        
+        normalRooms.Clear();        
 
         foreach (GameObject bonusRoomObject in bonusRoomObjects)
         {
@@ -72,42 +71,45 @@ public class MapGenerator : MonoBehaviour
         ClearAll();
         corridors.Clear();
         
-        List<SO_RoomType> generatedRooms = new List<SO_RoomType>();
-        List<SO_BonusRoomType> generatedBonusRooms = new List<SO_BonusRoomType>();
+        List<SO_RoomType> generatedRoomsType = new List<SO_RoomType>();
+        List<SO_BonusRoomType> generatedBonusRoomsType = new List<SO_BonusRoomType>();
         
         BonusRoomPosition bonusRoomPosition = (BonusRoomPosition) Random.Range(0,2);
         
-        SO_RoomType currentRoom = hubRoom;
+        SO_RoomType currentRoomType = hubRoom;
         
         
         //Spawn HUB, then spawn rooms
         for (int i = 0; i < generatedMaxBaseRooms; i++)
         {
-            generatedRooms.Add(currentRoom);
-            currentRoom = currentRoom.NextRoom();
+            generatedRoomsType.Add(currentRoomType);
+            currentRoomType = currentRoomType.NextRoom();
         }
 
-        generatedRooms.Add(merchantRoom);
-        generatedRooms.Add(endRoom);
+        generatedRoomsType.Add(merchantRoom);
+        generatedRoomsType.Add(endRoom);
 
-        foreach (var room in generatedRooms)
+        foreach (var room in generatedRoomsType)
         {
-            generatedBonusRooms.Add(room.BonusRoom());
+            generatedBonusRoomsType.Add(room.BonusRoom());
         }
         
         #region Drawing rooms
         int spaceBetweenRooms = 0;  //Space between the center of the last room to the center of the next one
         //loop
-        for (int i = 0; i < generatedRooms.Count; i++)
+        for (int i = 0; i < generatedRoomsType.Count; i++)
         {
             #region Main Path Rooms
             //stock room size
-            Vector2Int size = generatedRooms[i].GetSize();
+            Vector2Int size = generatedRoomsType[i].GetSize();
             
             //stock room center
             BoundsInt roomBounds = new BoundsInt(new Vector3Int(spaceBetweenRooms,0,0),new Vector3Int(size.x,size.y,0)); 
             roomBounds.SetCenter(new Vector3Int(spaceBetweenRooms+size.x/2,0,0));
-            roomsPositions.Add(roomBounds);
+            NormalRoom newNormalRoom;
+            newNormalRoom.bounds = roomBounds;
+            newNormalRoom.RoomType = generatedRoomsType[i];
+            normalRooms.Add(newNormalRoom);
             spaceBetweenRooms += size.x + CORRIDOR_LENGTH;                      
             
             //Drawing rooms
@@ -117,32 +119,32 @@ public class MapGenerator : MonoBehaviour
 
             #region Bonus Rooms
             //Check if room has a bonus room
-            if (generatedBonusRooms[i])
+            if (generatedBonusRoomsType[i])
             {
                 //Stock the position of the room (Under or Above main path)
-                generatedBonusRooms[i].position = bonusRoomPosition;
+                generatedBonusRoomsType[i].position = bonusRoomPosition;
                 
                 //if true, draw the room
-                Vector2Int bonusRoomSize = generatedBonusRooms[i].GetSize();
-                BoundsInt bonusRoomBounds = new BoundsInt(roomsPositions[i].position,new Vector3Int(bonusRoomSize.x,bonusRoomSize.y,0));;
+                Vector2Int bonusRoomSize = generatedBonusRoomsType[i].GetSize();
+                BoundsInt bonusRoomBounds = new BoundsInt(normalRooms[i].bounds.position,new Vector3Int(bonusRoomSize.x,bonusRoomSize.y,0));;
                 
-                Vector3Int offset = new Vector3Int(0,bonusRoomSize.y+bonusRoomCorridorSize.y+roomsPositions[i].size.y/2,0);
+                Vector3Int offset = new Vector3Int(0,bonusRoomSize.y+bonusRoomCorridorSize.y+normalRooms[i].bounds.size.y/2,0);
                 
                 //Check if the room needs to be drawn under or above the room
                 switch (bonusRoomPosition)
                 {
                     case BonusRoomPosition.Under:
-                        bonusRoomBounds.SetCenter(Vector3Int.FloorToInt(roomsPositions[i].center) - offset);
+                        bonusRoomBounds.SetCenter(Vector3Int.FloorToInt(normalRooms[i].bounds.center) - offset);
                         break;
                     case BonusRoomPosition.Above:
                     default:
-                        bonusRoomBounds.SetCenter(Vector3Int.FloorToInt(roomsPositions[i].center) + offset);
+                        bonusRoomBounds.SetCenter(Vector3Int.FloorToInt(normalRooms[i].bounds.center) + offset);
                         break;
                 }
                 BonusRoom bonus = new BonusRoom();
                 bonus.bounds = bonusRoomBounds;
                 bonus.connectedRoomId = i;
-                bonus.BonusRoomType = generatedBonusRooms[i];
+                bonus.BonusRoomType = generatedBonusRoomsType[i];
                 
                 bonusRooms.Add(bonus);
                 
@@ -153,25 +155,29 @@ public class MapGenerator : MonoBehaviour
             }
             #endregion
         }
+
+
         #endregion
         
+        RoomManager.roomsBounds = normalRooms;
+
         //Generating corridors
-        for (int i = 0; i < roomsPositions.Count-1; i++)
+        for (int i = 0; i < normalRooms.Count-1; i++)
         {
             Corridor corridor = new Corridor();
-            switch (generatedRooms[i+1].sizeType.name)
+            switch (generatedRoomsType[i+1].sizeType.name)
             {
                 case RoomSizeName.Large:
                     corridor.width = largeCorridorSize.y;
-                    corridor.start = new Vector3Int((int)roomsPositions[i].center.x,(int)roomsPositions[i].center.y) - new Vector3Int(0,Mathf.FloorToInt(largeCorridorSize.y/2),0);
-                    corridor.end = new Vector3Int((int)roomsPositions[i+1].center.x,(int)roomsPositions[i+1].center.y,0) - new Vector3Int(0,Mathf.FloorToInt(largeCorridorSize.y/2),0);
+                    corridor.start = new Vector3Int((int)normalRooms[i].bounds.xMax, (int)normalRooms[i].bounds.center.y) - new Vector3Int(0,Mathf.FloorToInt(largeCorridorSize.y/2),0);
+                    corridor.end = new Vector3Int((int)normalRooms[i+1].bounds.xMin,(int)normalRooms[i+1].bounds.center.y,0) - new Vector3Int(0,Mathf.FloorToInt(largeCorridorSize.y/2),0);
                     break;
                 case RoomSizeName.Small:
                 case RoomSizeName.Medium:
                 default:
                     corridor.width = smallCorridorWidth.y;
-                    corridor.start = new Vector3Int((int)roomsPositions[i].center.x,(int)roomsPositions[i].center.y) - new Vector3Int(0,Mathf.FloorToInt(smallCorridorWidth.y/2),0);
-                    corridor.end = new Vector3Int((int)roomsPositions[i+1].center.x,(int)roomsPositions[i+1].center.y,0) - new Vector3Int(0,Mathf.FloorToInt(smallCorridorWidth.y/2),0);
+                    corridor.start = new Vector3Int((int)normalRooms[i].bounds.xMax,(int)normalRooms[i].bounds.center.y) - new Vector3Int(0,Mathf.FloorToInt(smallCorridorWidth.y/2),0);
+                    corridor.end = new Vector3Int((int)normalRooms[i+1].bounds.xMin, (int)normalRooms[i+1].bounds.center.y,0) - new Vector3Int(0,Mathf.FloorToInt(smallCorridorWidth.y/2),0);
                     break;
             }
             corridor.roomId = i;
@@ -185,7 +191,7 @@ public class MapGenerator : MonoBehaviour
             Corridor corridor = new Corridor();
             corridor.width = bonusRoomCorridorSize.x;
             corridor.start = Vector3Int.FloorToInt(bonusRooms[i].bounds.center) - new Vector3Int(bonusRoomCorridorSize.x / 2, 0, 0);
-            corridor.end = Vector3Int.FloorToInt(roomsPositions[i].center) + new Vector3Int(bonusRoomCorridorSize.x / 2, 0, 0);
+            corridor.end = Vector3Int.FloorToInt(normalRooms[i].bounds.center) + new Vector3Int(bonusRoomCorridorSize.x / 2, 0, 0);
             corridor.type = CorridorType.Vertical;
             corridor.roomId = bonusRooms[i].connectedRoomId;
             corridor.isBonus = true;
@@ -227,20 +233,32 @@ public class MapGenerator : MonoBehaviour
             DrawCorridor(floorMap,floorTile,corridor.start,corridor.end,corridor.width,corridor.type);
             DrawCorridor(wallsMap,wallsTile,corridor.start,corridor.end,corridor.width,corridor.type);
             currentCorridor++;
-            if (corridors[currentCorridor].isBonus)
+            if (corridors[currentCorridor].isBonus && currentCorridor < corridors.Count)
             {
                 DrawNextCorridor();
             }
         }
-
-        
     }
 
-    public void DrawNextCorridor(InputAction.CallbackContext context)
+    public void DeleteLastCorridor()
     {
-        if (context.ReadValueAsButton())
+        if (currentCorridor < corridors.Count)
         {
-           DrawNextCorridor();
+            //If bonus corridor, delete 2 before 
+            if (corridors[currentCorridor - 1].isBonus)
+            {
+                Corridor corridor = corridors[currentCorridor-2];
+                DeleteCorridor(floorMap, corridor.start, corridor.end, corridor.width, corridor.type);
+                DeleteCorridor(wallsMap, corridor.start, corridor.end, corridor.width, corridor.type);
+                DeleteLastCorridor();
+            }
+            else
+            {
+                Corridor corridor = corridors[currentCorridor - 1];
+                DeleteCorridor(floorMap, corridor.start, corridor.end, corridor.width, corridor.type);
+                DeleteCorridor(wallsMap, corridor.start, corridor.end, corridor.width, corridor.type);
+
+            }
         }
     }
 
@@ -294,6 +312,38 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    private void DeleteCorridor(Tilemap map, Vector3Int start, Vector3Int end, int width,
+        CorridorType type)
+    {
+        int length = 0;
+        switch (type)
+        {
+            case CorridorType.Horizontal:
+                length = end.x - start.x;
+                for (int x = 0; x < length; x++)
+                {
+                    for (int y = 0; y < width; y++)
+                    {
+                        map.SetTile(new Vector3Int(start.x + x, start.y + y, 0), null);
+                    }
+                }
+
+                break;
+            case CorridorType.Vertical:
+                int startYVert = Mathf.Min(start.y, end.y);
+                int lengthY = Mathf.Abs(end.y - start.y);
+
+                for (int x = 0; x < width; x++)
+                {
+                    for (int y = 0; y < lengthY; y++)
+                    {
+                        map.SetTile(new Vector3Int(start.x + x, startYVert + y, 0), null);
+                    }
+                }
+                break;
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -303,10 +353,15 @@ public class MapGenerator : MonoBehaviour
         }
         
         Gizmos.color = Color.blue;
-        foreach (BoundsInt room in roomsPositions)
+        foreach (NormalRoom room in normalRooms)
         {
-            Gizmos.DrawWireCube(room.center,room.size);
+            Gizmos.DrawWireCube(room.bounds.center,room.bounds.size);
         }
+    }
+
+    private void Update()
+    {
+        
     }
 
     /*
@@ -327,5 +382,5 @@ public class MapGenerator : MonoBehaviour
             map.SetTile(position, tile);
         }
     }*/
-    
+
 }

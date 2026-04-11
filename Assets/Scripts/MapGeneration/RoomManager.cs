@@ -2,12 +2,18 @@ using System.Collections.Generic;
 using Rooms;
 using UnityEngine;
 
-public class RoomManager : MonoBehaviour
+public static class RoomManager
 {
-    List<BoundsInt> _rooms = new List<BoundsInt>();
+    public static List<NormalRoom> roomsBounds;
+    static int currentRoom = 1;
 
-    public BoundsInt CurrentRoomBounds()
+    public static BoundsInt GetCurrentRoomBounds()
     {
-        return _rooms[0];
+        return roomsBounds[currentRoom].bounds;
+    }
+
+    public static void EnteredNewRoom()
+    {
+        currentRoom++;
     }
 }

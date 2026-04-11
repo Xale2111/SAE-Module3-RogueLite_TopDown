@@ -26,7 +26,15 @@ public class MapGenerator_Editor : Editor
         {
             mapGenerator.DrawNextCorridor();
         }
-       
+
+        EditorGUILayout.Space(10);
+        EditorGUILayout.Separator();
+        GUI.backgroundColor = new Color(0.86f, 0.52f, 0.07f);
+        if (GUILayout.Button("Delete Last corridor"))
+        {
+            mapGenerator.DeleteLastCorridor();
+        }
+
         EditorGUILayout.Space(10);
         EditorGUILayout.Separator();
         GUI.backgroundColor = new Color(0.8f,0.2f,0.2f);

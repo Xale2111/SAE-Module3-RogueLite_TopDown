@@ -1,20 +1,20 @@
-﻿namespace FSM.States
+﻿using UnityEngine;
+
+namespace FSM.States
 {
     public class FsmReact : IState
     {
         public void Enter()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("REACTING TO PLAYER");
         }
 
         public void Tick()
-        {
-            throw new System.NotImplementedException();
+        {            
         }
 
         public void Exit()
-        {
-            throw new System.NotImplementedException();
+        {            
         }
 
         public Context Context { get; set; }

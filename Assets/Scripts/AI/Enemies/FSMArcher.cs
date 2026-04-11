@@ -7,11 +7,12 @@ using UnityEngine;
 
 namespace FSM
 {
-    public class FSMSwordman : FSMEnemy
+    public class FSMArcher : FSMEnemy
     {
         protected FsmPatrol _patrol = new FsmPatrol(); 
         protected FsmChase _chase = new FsmChase();
-        protected FsmAttack _attack = new FsmAttack();        
+        protected FsmAttack _attack = new FsmAttack();
+        protected FsmFlee _flee = new FsmFlee();
 
         bool _sawPlayerOnce = false;
         
@@ -20,16 +21,32 @@ namespace FSM
             _patrol.Context = _context;
             _chase.Context = _context;
             _attack.Context = _context;
+            _flee.Context = _context;
             base.OnStart();
             
             _fsmMachine.AddTransition(_idle, () => true, _patrol);
-            _fsmMachine.AddTransition(_patrol, () => CheckPlayerSeen() && !_sawPlayerOnce, _react); //IF PLAYER IN CHASE RANGE && KNOW PLAYER == FALSE
-            _fsmMachine.AddTransition(_react, () => true, _chase); //CHECK ANIMATION COMPLETE + MAKE KNOW PLAYER TRUE : TODO ADD ANIMATION CHECK
-            _fsmMachine.AddTransition(_patrol, () => CheckPlayerSeen() && _sawPlayerOnce, _chase); //IF PLAYER IN CHASE RANGE AND KNOW PLAYER == TRUE
-            _fsmMachine.AddTransition(_chase, () => !CheckPlayerSeen(), _patrol); //LOST PLAYER
-            //_fsmMachine.AddTransition(_chase, () => true, _attack); IF PLAYER IN ATTACK RANGE
-            //_fsmMachine.AddTransition(_attack, () => true, _patrol); LOST PLAYER
-            //_fsmMachine.AddTransition(_attack, () => true, _chase); PLAYER NOT IN ATTACK RANGE            
+            //_fsmMachine.AddTransition(_patrol, () => CheckPlayerSeen() && !_sawPlayerOnce, _react);
+
+            _fsmMachine.AddTransition(_patrol, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _flee);
+            _fsmMachine.AddTransition(_flee, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _patrol);
+            
+            /*           
+            react to chase
+            react to flee
+
+            Patrol to chase
+            Patrol to flee
+            chase to patrol
+            flee to patrol
+            chase to flee
+            flee to chase
+            chase to attack
+            attack to chase
+            attack to flee
+            attack to patrol
+            
+            
+             */
         }
 
         protected override void OnUpdate()

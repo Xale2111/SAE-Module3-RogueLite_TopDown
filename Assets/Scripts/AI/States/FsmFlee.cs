@@ -1,20 +1,20 @@
-﻿namespace FSM.States
+﻿using UnityEngine;
+
+namespace FSM.States
 {
     public class FsmFlee : IState
     {
         public void Enter()
-        {
-            throw new System.NotImplementedException();
+        {            
         }
 
         public void Tick()
-        {
-            throw new System.NotImplementedException();
+        {            
+            Context.MoveTo(Context.SelfTransform.position - Context.GetPlayerTransform.position);
         }
 
         public void Exit()
-        {
-            throw new System.NotImplementedException();
+        {            
         }
 
         public Context Context { get; set; }

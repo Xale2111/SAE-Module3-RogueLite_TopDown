@@ -24,6 +24,12 @@ namespace Rooms
         public SO_BonusRoomType soRoom;
     }
 
+    public struct NormalRoom
+    {
+        public BoundsInt bounds;        
+        public SO_RoomType RoomType;
+    }
+
     [CreateAssetMenu(fileName = "RoomType", menuName = "Rooms/RoomType", order = 0)]
     public class SO_RoomType : SO_Room
     {

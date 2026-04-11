@@ -8,7 +8,7 @@ public class Context : MonoBehaviour
     //[SerializeField] private FsmLeader _leader;
     
     private PlayerController _player;
-    public Transform GetPlayerTransform() => _player.transform;
+    public Transform GetPlayerTransform => _player.transform;
     
     public Transform SelfTransform => transform;
     
@@ -16,9 +16,7 @@ public class Context : MonoBehaviour
     
     public Rigidbody2D SelfRigidbody => _rigidbody;
 
-    private RoomManager _roomManager;
-    public BoundsInt GetRoomBounds() => _roomManager.CurrentRoomBounds();
-
+    public BoundsInt GetRoomBounds() => RoomManager.GetCurrentRoomBounds();
 
     public Enemy_SO EnemyStat => _enemyStat;
 
@@ -30,14 +28,36 @@ public class Context : MonoBehaviour
         SelfRigidbody.MoveRotation(angle);
     }
 
+
     private void OnEnable()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _player = FindFirstObjectByType<PlayerController>();
-        _roomManager = FindFirstObjectByType<RoomManager>();
+        _player = FindFirstObjectByType<PlayerController>();        
         if (!_enemyStat)
         {
             _enemyStat = GetComponent<Enemy_SO>();
         }
+    }
+
+    public bool CheckPlayerInGivenRange(float rangeToCheck)
+    {
+        bool canChase;
+
+        canChase = Vector3.Distance(SelfTransform.position, GetPlayerTransform.position) < rangeToCheck; // if true, player in range
+        canChase = canChase ? GetPlayerTransform.position.x > GetRoomBounds().xMin && GetPlayerTransform.position.x < GetRoomBounds().xMax : false; //If true, check player position to be in room, else false
+
+        return canChase;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(SelfTransform.position,EnemyStat.AttackRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(SelfTransform.position, EnemyStat.DetectionRadius);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(SelfTransform.position,EnemyStat.FleeRange);
     }
 }
