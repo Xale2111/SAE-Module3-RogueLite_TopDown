@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ad29a715b2740d2890fff5e8f317b98, type: 3}
-  m_Name: Archer
+  m_Name: Leader
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_SO
-  MoveSpeed: 2.5
-  FleeSpeed: 4
-  Health: 100
+  MoveSpeed: 1.2
+  FleeSpeed: 0
+  Health: 250
   Damage: 1
-  Weight: 1
-  DetectionRadius: 7
-  AttackRange: 5.25
-  FleeRange: 3.25
+  Weight: 2
+  DetectionRadius: 4
+  AttackRange: 0.8
+  FleeRange: 0

@@ -19,6 +19,11 @@ namespace FSM
             _currentState = state;
             _currentState.Enter();
         }
+
+        public IState GetCurrentState()
+        { 
+            return _currentState;
+        }
         
         public void Tick()
         {

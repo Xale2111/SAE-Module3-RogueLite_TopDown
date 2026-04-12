@@ -7,6 +7,8 @@ namespace FSM.States
         public void Enter()
         {
             Debug.Log("REACTING TO PLAYER");
+            Context.StopMove();
+            Context.LookAtPlayer(Context.GetPlayerTransform.position-Context.SelfTransform.position);
         }
 
         public void Tick()

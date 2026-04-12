@@ -3,7 +3,9 @@
     public class FsmDie : IState
     {
         public void Enter()
-        {            
+        {
+            Context.KillEntity();
+            
         }
 
         public void Tick()

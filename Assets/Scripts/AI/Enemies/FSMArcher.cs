@@ -14,7 +14,6 @@ namespace FSM
         protected FsmAttack _attack = new FsmAttack();
         protected FsmFlee _flee = new FsmFlee();
 
-        bool _sawPlayerOnce = false;
         
         protected override void OnStart()
         {
@@ -25,44 +24,27 @@ namespace FSM
             base.OnStart();
             
             _fsmMachine.AddTransition(_idle, () => true, _patrol);
-            //_fsmMachine.AddTransition(_patrol, () => CheckPlayerSeen() && !_sawPlayerOnce, _react);
+            _fsmMachine.AddTransition(_patrol, () => CheckPlayerSeen() && !_sawPlayerOnce, _react);
 
-            _fsmMachine.AddTransition(_patrol, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _flee);
+            _fsmMachine.AddTransition(_react, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _flee);
+            _fsmMachine.AddTransition(_react, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius) && !_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _chase);
+
+            _fsmMachine.AddTransition(_patrol, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange) && _sawPlayerOnce, _flee);
             _fsmMachine.AddTransition(_flee, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _patrol);
+
+            _fsmMachine.AddTransition(_patrol, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius) && _sawPlayerOnce, _chase);
+            _fsmMachine.AddTransition(_chase, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _patrol);
+
+            _fsmMachine.AddTransition(_chase,() => _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _flee);
+            _fsmMachine.AddTransition(_flee, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange) && _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _chase);
+
+            _fsmMachine.AddTransition(_chase, ()=>_context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange), _attack);
             
-            /*           
-            react to chase
-            react to flee
-
-            Patrol to chase
-            Patrol to flee
-            chase to patrol
-            flee to patrol
-            chase to flee
-            flee to chase
-            chase to attack
-            attack to chase
-            attack to flee
-            attack to patrol
+            _fsmMachine.AddTransition(_attack, ()=>!_context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange) && _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _chase);
+            _fsmMachine.AddTransition(_attack, ()=>_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _flee);
+            _fsmMachine.AddTransition(_attack, ()=> !_context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _patrol);
             
+        }
             
-             */
-        }
-
-        protected override void OnUpdate()
-        {
-            base.OnUpdate();
-
-            if (!_sawPlayerOnce && CheckPlayerSeen())
-            {
-                _sawPlayerOnce = true;
-            }
-        }
-
-        //TODO : PUT IN CONTEXT ??
-        private bool CheckPlayerSeen()
-        {
-            return _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius);
-        }
     }
 }

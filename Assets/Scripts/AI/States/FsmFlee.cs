@@ -10,7 +10,7 @@ namespace FSM.States
 
         public void Tick()
         {            
-            Context.MoveTo(Context.SelfTransform.position - Context.GetPlayerTransform.position);
+            Context.FleeTo(Context.SelfTransform.position - Context.GetPlayerTransform.position);
         }
 
         public void Exit()

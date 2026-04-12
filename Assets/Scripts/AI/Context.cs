@@ -1,41 +1,50 @@
+using FSM;
 using System;
 using UnityEngine;
 
 public class Context : MonoBehaviour
 {
-    [SerializeField] private Enemy_SO _enemyStat;
+    [SerializeField] private EnemyInstance _enemyInstance;    
+    [SerializeField] private float _rotationSpeed = 10f;
 
-    //[SerializeField] private FsmLeader _leader;
-    
+
     private PlayerController _player;
+    //private EnemyInstance _enemyInstance;
+    private Rigidbody2D _rigidbody;
+
+
     public Transform GetPlayerTransform => _player.transform;
     
-    public Transform SelfTransform => transform;
-    
-    private Rigidbody2D _rigidbody;
+    public Transform SelfTransform => transform;    
     
     public Rigidbody2D SelfRigidbody => _rigidbody;
 
     public BoundsInt GetRoomBounds() => RoomManager.GetCurrentRoomBounds();
 
-    public Enemy_SO EnemyStat => _enemyStat;
+    public Enemy_SO EnemyStat => _enemyInstance.GetEnemyBaseStat();   
+    public EnemyInstance EnemyInstance => _enemyInstance;
 
     public void MoveTo(Vector3 direction)
     {
-        SelfRigidbody.linearVelocity = direction.normalized * _enemyStat.MoveSpeed;
-        
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-        SelfRigidbody.MoveRotation(angle);
+        SelfRigidbody.linearVelocity = direction.normalized * EnemyStat.MoveSpeed;
+
+        LookAtPlayer(direction);
     }
 
+    public void FleeTo(Vector3 direction)
+    {
+        SelfRigidbody.linearVelocity = direction.normalized * EnemyStat.FleeSpeed;
+
+        LookAtPlayer(direction);
+    }
 
     private void OnEnable()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _player = FindFirstObjectByType<PlayerController>();        
-        if (!_enemyStat)
-        {
-            _enemyStat = GetComponent<Enemy_SO>();
+        _player = FindFirstObjectByType<PlayerController>();
+        if (!_enemyInstance)
+        {         
+            _enemyInstance = GetComponent<EnemyInstance>();        
         }
     }
 
@@ -49,15 +58,43 @@ public class Context : MonoBehaviour
         return canChase;
     }
 
+    public void StopMove()
+    { 
+        _rigidbody.linearVelocity = Vector3.zero;
+    }
+
+    public void KillEntity()
+    { 
+        gameObject.SetActive(false);
+    }
+
+    public void LookAtPlayer(Vector3 direction)
+    {
+        if (direction.sqrMagnitude < 0.001f)
+            return;
+
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+
+        float currentAngle = SelfRigidbody.rotation;
+
+        float smoothAngle = Mathf.LerpAngle(
+            currentAngle,
+            targetAngle,
+            _rotationSpeed * Time.fixedDeltaTime
+        );
+
+        SelfRigidbody.MoveRotation(smoothAngle);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(SelfTransform.position,EnemyStat.AttackRange);
+        Gizmos.DrawWireSphere(SelfTransform.position, EnemyStat.AttackRange);
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(SelfTransform.position, EnemyStat.DetectionRadius);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(SelfTransform.position,EnemyStat.FleeRange);
+        Gizmos.DrawWireSphere(SelfTransform.position, EnemyStat.FleeRange);
     }
 }

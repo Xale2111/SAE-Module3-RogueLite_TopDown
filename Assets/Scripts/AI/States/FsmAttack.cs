@@ -1,15 +1,18 @@
-﻿namespace FSM.States
+﻿using UnityEngine;
+
+namespace FSM.States
 {
     public class FsmAttack : IState
     {
         public void Enter()
         {
-            
+            Debug.Log("ATTACKING");
+            Context.StopMove();
         }
 
         public void Tick()
         {
-            
+            Context.LookAtPlayer(Context.GetPlayerTransform.position-Context.SelfTransform.position);
         }
 
         public void Exit()

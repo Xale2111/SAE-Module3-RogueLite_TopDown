@@ -4,6 +4,7 @@
 public class Enemy_SO : ScriptableObject
 {
     [SerializeField] public float MoveSpeed;
+    [SerializeField] public float FleeSpeed;
     [SerializeField] public int Health;
     [SerializeField] public int Damage;
     [SerializeField] public float Weight;
