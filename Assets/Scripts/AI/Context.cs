@@ -5,11 +5,9 @@ using UnityEngine;
 public class Context : MonoBehaviour
 {
     [SerializeField] private EnemyInstance _enemyInstance;    
-    [SerializeField] private float _rotationSpeed = 10f;
+    [SerializeField] private float _rotationSpeed = 10f;    
 
-
-    private PlayerController _player;
-    //private EnemyInstance _enemyInstance;
+    private PlayerController _player;    
     private Rigidbody2D _rigidbody;
 
 
@@ -28,14 +26,14 @@ public class Context : MonoBehaviour
     {
         SelfRigidbody.linearVelocity = direction.normalized * EnemyStat.MoveSpeed;
 
-        LookAtPlayer(direction);
+        LookAt(direction);
     }
 
     public void FleeTo(Vector3 direction)
     {
         SelfRigidbody.linearVelocity = direction.normalized * EnemyStat.FleeSpeed;
 
-        LookAtPlayer(direction);
+        LookAt(direction);
     }
 
     private void OnEnable()
@@ -68,7 +66,7 @@ public class Context : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void LookAtPlayer(Vector3 direction)
+    public void LookAt(Vector3 direction)
     {
         if (direction.sqrMagnitude < 0.001f)
             return;

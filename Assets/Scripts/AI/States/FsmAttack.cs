@@ -12,7 +12,7 @@ namespace FSM.States
 
         public void Tick()
         {
-            Context.LookAtPlayer(Context.GetPlayerTransform.position-Context.SelfTransform.position);
+            Context.LookAt(Context.GetPlayerTransform.position-Context.SelfTransform.position);
         }
 
         public void Exit()

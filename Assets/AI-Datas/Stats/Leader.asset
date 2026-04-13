@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad29a715b2740d2890fff5e8f317b98, type: 3}
   m_Name: Leader
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_SO
-  MoveSpeed: 1.2
+  MoveSpeed: 1.5
   FleeSpeed: 0
   Health: 250
   Damage: 1
