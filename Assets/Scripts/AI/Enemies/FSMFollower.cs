@@ -16,7 +16,7 @@ namespace FSM
         protected FsmFollow _follow = new FsmFollow();
         protected FsmPanic _panic = new FsmPanic();
         protected FsmFlee _flee = new FsmFlee();
-
+        protected FsmAttackAtTarget _attackTarget = new FsmAttackAtTarget();
 
         protected override void OnStart()
         {
@@ -24,14 +24,22 @@ namespace FSM
             _follow.Leader = _leader;
             _follow.PositionToFollow = positionToFollow;
             _panic.Context = _context;
-            _flee.Context = _context;   
+            _flee.Context = _context;
+            _attackTarget.Context = _context;
             base.OnStart();
 
             _fsmMachine.AddTransition(_idle, () => true, _follow);
             _fsmMachine.AddTransition(_follow, () => !LeaderIsAlive(), _panic);
+            _fsmMachine.AddTransition(_follow,() => LeaderIsAttacking(),_attackTarget);
+            _fsmMachine.AddTransition(_attackTarget,() => !LeaderIsAttacking(), _follow);
             _fsmMachine.AddTransition(_panic, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _flee);
             _fsmMachine.AddTransition(_flee, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _panic);
 
+        }
+
+        protected override void OnUpdate()
+        {
+            base.OnUpdate();            
         }
 
         private bool LeaderIsAlive()
@@ -44,8 +52,13 @@ namespace FSM
             return false;
         }
 
-        
-
-        
+        private bool LeaderIsAttacking()
+        { 
+            if(_leader)
+            {
+                return _leader.IsAttacking;
+            }
+            return false;
+        }
     }
 }

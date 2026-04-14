@@ -13,6 +13,9 @@ namespace FSM
         protected FsmPatrol _patrol = new FsmPatrol();
         protected FsmChase _chase = new FsmChase();
         protected FsmAttack _attack = new FsmAttack();
+
+        public bool IsAttacking;
+
         protected override void OnStart()
         {
             _patrol.Context = _context;
@@ -30,6 +33,19 @@ namespace FSM
             _fsmMachine.AddTransition(_attack, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange) && CheckPlayerSeen(), _chase);// PLAYER NOT IN ATTACK RANGE            
         }
 
+        protected override void OnUpdate()
+        {
+            base.OnUpdate();
+            if (_fsmMachine.GetCurrentState() == _attack)
+            {
+                IsAttacking = true;
+            }
+            else
+            {
+                IsAttacking = false;
+            }
+        }
+
         public IState GetCurrentState()
         { 
             return _fsmMachine.GetCurrentState();
@@ -37,7 +53,7 @@ namespace FSM
 
         public bool IsAlive()
         { 
-            return _context.EnemyInstance.GetHealth() > 0;
+            return _context.EnemyInstance.GetHealth() > 0 && gameObject.activeSelf;
         }
     }
 }

@@ -31,7 +31,6 @@ public class EnemyInstance : MonoBehaviour
     }*/
 
 
-
     public Enemy_SO GetEnemyBaseStat()
     { 
         return enemyBaseStat;
@@ -47,5 +46,3 @@ public class EnemyInstance : MonoBehaviour
     }    
 
 }
-
-
