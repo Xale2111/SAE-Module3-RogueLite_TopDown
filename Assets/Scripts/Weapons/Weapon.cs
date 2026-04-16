@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class Weapon : MonoBehaviour
     public Weapon_SO WeaponData;
     public int BaseDamage;
     public int Level;
-    [SerializeField] protected float coolDown;
+    [SerializeField] protected float _cooldown;
 
     [SerializeField] protected Animator animator;
 
@@ -29,4 +30,5 @@ public class Weapon : MonoBehaviour
     public virtual void RightClick()
     {        
     }
+    
 }

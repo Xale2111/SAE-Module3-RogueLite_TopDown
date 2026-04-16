@@ -34,7 +34,7 @@ namespace FSM
             
             _fsmMachine.AddTransition(_hit, ()=>true,_idle); //When Hit, go back to idle
             
-            _fsmMachine.SetState(_idle);
+            _fsmMachine.SetFirstState(_idle);
         }
 
         private void Update()

@@ -30,13 +30,14 @@ namespace FSM
             _fsmMachine.AddTransition(_react, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius) && !_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _chase);
 
             _fsmMachine.AddTransition(_patrol, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange) && _sawPlayerOnce, _flee);
-            _fsmMachine.AddTransition(_flee, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _patrol);
+            _fsmMachine.AddTransition(_flee, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _patrol);
 
             _fsmMachine.AddTransition(_patrol, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius) && _sawPlayerOnce, _chase);
             _fsmMachine.AddTransition(_chase, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _patrol);
 
             _fsmMachine.AddTransition(_chase,() => _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _flee);
-            _fsmMachine.AddTransition(_flee, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange) && _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _chase);
+            _fsmMachine.AddTransition(_flee, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange) && _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _chase);
+            _fsmMachine.AddTransition(_flee, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange) && _context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange), _attack);
 
             _fsmMachine.AddTransition(_chase, ()=>_context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange), _attack);
             

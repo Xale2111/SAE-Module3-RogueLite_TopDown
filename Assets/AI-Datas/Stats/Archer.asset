@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad29a715b2740d2890fff5e8f317b98, type: 3}
   m_Name: Archer
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_SO
-  MoveSpeed: 2.5
-  FleeSpeed: 4
+  MoveSpeed: 2.75
+  FleeSpeed: 3.5
   Health: 100
   Damage: 1
   Weight: 1

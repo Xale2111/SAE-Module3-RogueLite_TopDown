@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private GameObject aimLookAt;
+    [SerializeField] private float rotationSpeed = 10f;
     
     private Rigidbody2D rb;
     private float _interactCooldown = 0.5f;
@@ -33,15 +34,13 @@ public class PlayerController : MonoBehaviour
     
     if (aimLookAt != null)
     {
-        Vector2 direction = (aimLookAt.transform.position - transform.position).normalized;
+        Vector2 direction = aimLookAt.transform.position - transform.position;
         
         if (direction.magnitude > 0.01f)
         {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
             
-            angle = Mathf.Repeat(angle + 180f, 360f) - 180f;
-            
-            rb.MoveRotation(angle);
+            rb.rotation = Mathf.LerpAngle(rb.rotation, angle, Time.deltaTime*rotationSpeed);
         }
     }
 }

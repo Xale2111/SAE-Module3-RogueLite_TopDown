@@ -38,6 +38,8 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -6276113872393466685, guid: f6beb2ea0732fee4a93fcae54d50be0e, type: 3}
+    - time: 0.41666666
+      value: {fileID: 5342339644809915694, guid: 7ca78e61e7a15894ab8d256e7fa69670, type: 3}
     attribute: m_Sprite
     path: weapon_bow_0
     classID: 212
@@ -70,12 +72,13 @@ AnimationClip:
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
     - {fileID: -6276113872393466685, guid: f6beb2ea0732fee4a93fcae54d50be0e, type: 3}
+    - {fileID: 5342339644809915694, guid: 7ca78e61e7a15894ab8d256e7fa69670, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.016666668
+    m_StopTime: 0.43333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -157,4 +160,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.41666666
+    functionName: ShootNormalArrow
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

@@ -32,6 +32,7 @@ namespace FSM
             _fsmMachine.AddTransition(_follow, () => !LeaderIsAlive(), _panic);
             _fsmMachine.AddTransition(_follow,() => LeaderIsAttacking(),_attackTarget);
             _fsmMachine.AddTransition(_attackTarget,() => !LeaderIsAttacking(), _follow);
+            _fsmMachine.AddTransition(_attackTarget,() => !LeaderIsAlive(), _panic);
             _fsmMachine.AddTransition(_panic, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _flee);
             _fsmMachine.AddTransition(_flee, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _panic);
 

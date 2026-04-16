@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace FSM
 {
@@ -11,10 +12,28 @@ namespace FSM
         
         private Dictionary<IState, List<Transition>> _transitions = new Dictionary<IState, List<Transition>>();
         
-        public void SetState(IState state)
+        float delay = 0.2f;
+        float timer = 0;
+        
+        public void SetState(IState state, bool fromAnyState = false)//Add bool fromAnyState
         {
             if (state == null) return;
-            
+            //If !fromAnyState -> DO 
+            //if timer < delay -> return   
+            //reset timer
+            if (!fromAnyState)
+            {
+                if (timer < delay) return;
+            }
+            timer = 0;   
+            _currentState?.Exit();
+            _currentState = state;
+            _currentState.Enter();
+        }
+        public void SetFirstState(IState state)
+        {
+            if (state == null) return;
+
             _currentState?.Exit();
             _currentState = state;
             _currentState.Enter();
@@ -27,13 +46,10 @@ namespace FSM
         
         public void Tick()
         {
-            IState newState = CheckTransitions();
-            
-            if (newState != _currentState)
-            {
-                SetState(newState);
-            }
-            
+            //Increment timer
+            timer += Time.deltaTime;
+            CheckTransitions();
+           
             _currentState?.Tick();
             
         }
@@ -55,21 +71,43 @@ namespace FSM
             }
         }
 
-        private IState CheckTransitions()
+        private void CheckTransitions()
         {
+            IState newState = null;
+            //ANY TRANSITIONS 
             foreach (Transition anyStateTransition in _anyStateTransitions)
             {
-                if(anyStateTransition.IsVerified()) return anyStateTransition.State;
+                if (anyStateTransition.IsVerified())
+                { 
+                    newState = anyStateTransition.State;
+                    //SET STATE INSTEAD OF RETURN
+                    if (newState != _currentState)
+                    {
+                        SetState(newState, true);
+                    }
+                
+                }
             }
 
+            //TRANSITIONS
             if (_transitions.TryGetValue(_currentState, out List<Transition> possibleTransitions))
             {
                 foreach (Transition possibleTransition in possibleTransitions)
                 {
-                    if (possibleTransition.IsVerified()) return possibleTransition.State;
+                    if (possibleTransition.IsVerified())
+                    {
+                        //SET STATE INSTEAD OF RETURN
+                        newState = possibleTransition.State;
+                        //SET STATE INSTEAD OF RETURN
+                        if (newState != _currentState)
+                        {
+                            SetState(newState);
+                        }
+                    }
                 }
             }
-            return _currentState;
+            
+            Debug.Log("Current State: " + _currentState);
         }
     }
 }
