@@ -5,10 +5,8 @@ public class Bow : Weapon
 {    
     [SerializeField] private GameObject _normalArrowPrefab;
     [SerializeField] private GameObject _specialArrowPrefab;  
-    [SerializeField] private Transform _aimingTransform;
-    [SerializeField] private bool autoShoot;
-
-    private float _timer = 0;
+    [SerializeField] private Transform _aimingTransform;    
+    
     public override void LeftClick()
     {
         if (animator)
@@ -48,22 +46,5 @@ public class Bow : Weapon
         Quaternion aimDirection = Quaternion.Euler(0, 0, angle);
 
         Instantiate(arrowPrefab, transform.position, aimDirection);
-    }
-
-    private void Update()
-    {
-        if (autoShoot)
-        {
-            if (_timer > _cooldown)
-            {
-                _timer = 0;
-                SpawnArrow(_normalArrowPrefab);
-            }
-            else
-            {
-                _timer += Time.deltaTime;
-            }
-            
-        }
     }
 }
