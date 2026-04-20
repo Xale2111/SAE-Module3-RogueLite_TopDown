@@ -26381,6 +26381,10 @@ PrefabInstance:
       value: WholePlayer
       objectReference: {fileID: 0}
     - target: {fileID: 6243093801516551151, guid: 7feac2b81172c8148b7170245df5afc1, type: 3}
+      propertyPath: BaseDamage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6243093801516551151, guid: 7feac2b81172c8148b7170245df5afc1, type: 3}
       propertyPath: _aimingTransform
       value: 
       objectReference: {fileID: 2099795388}

@@ -151,7 +151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3505737205958934885}
-  - component: {fileID: 1660375640734230071}
+  - component: {fileID: -2361597512868694071}
   - component: {fileID: 2632070969317475781}
   - component: {fileID: 3221475316294564932}
   m_Layer: 0
@@ -178,7 +178,7 @@ Transform:
   - {fileID: 6087528176321284097}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1660375640734230071
+--- !u!114 &-2361597512868694071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,10 +187,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2540662388258228287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd026ebbfaf75d341b8afd795c00589e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f837ed2659c9214b853ecbbc0d471bd, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  Damage: 0
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Weapons.Bow.NormalArrow
+  Damage: 25
   StunDuration: 0
   _speed: 15
 --- !u!50 &2632070969317475781
@@ -254,7 +254,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0015214682, y: -0.019778877}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -264,7 +264,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.1, y: 0.8}
+  m_Size: {x: 0.14564347, y: 0.8395577}
   m_EdgeRadius: 0
 --- !u!1 &8902620195664486463
 GameObject:
@@ -343,8 +343,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 470425713
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 595850469201297674, guid: abeb108d5c0743b43ad827a3c4e7b1f3, type: 3}

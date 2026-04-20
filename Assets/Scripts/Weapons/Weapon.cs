@@ -30,5 +30,10 @@ public class Weapon : MonoBehaviour
     public virtual void RightClick()
     {        
     }
+
+    public int GetDamage()
+    { 
+        return BaseDamage;
+    }
     
 }

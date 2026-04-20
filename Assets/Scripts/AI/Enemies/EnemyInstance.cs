@@ -12,6 +12,8 @@ public class EnemyInstance : MonoBehaviour
     private int _health = 1;
     private int _damage = 1;
 
+    public bool IsStunned = false;
+
     private void Start()
     {        
         _health = enemyBaseStat.Health;
@@ -43,6 +45,21 @@ public class EnemyInstance : MonoBehaviour
     public void TakeDamage(int damageDelt)
     {
         _health -= damageDelt;
-    }    
+    }
 
+    public void Stun(float stunDuration)
+    {
+        if (!IsStunned)
+        {
+            StartCoroutine(StartStun(stunDuration));
+        }
+    
+    }
+
+    private System.Collections.IEnumerator StartStun(float stunDuration)
+    {
+        IsStunned = true;
+        yield return new WaitForSeconds(stunDuration);
+        IsStunned = false;
+    }
 }
