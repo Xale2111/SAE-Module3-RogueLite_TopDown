@@ -82,7 +82,7 @@ MonoBehaviour:
   WeaponData: {fileID: 11400000, guid: b8cba1d454da3ee48bd2ab23e4a4b946, type: 2}
   BaseDamage: 0
   Level: 0
-  coolDown: 0
+  _cooldown: 0
   animator: {fileID: 4636866600625217467}
 --- !u!95 &4636866600625217467
 Animator:
@@ -1272,6 +1272,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &2490937685523441678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1275040292246033978}
+  m_Layer: 0
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1275040292246033978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2490937685523441678}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.24, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5692956305461498633}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2940701939582512489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1476,10 +1507,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoubleAxe
   WeaponData: {fileID: 11400000, guid: 532933d5ca2d0a24e92f838568ddde69, type: 2}
-  BaseDamage: 0
+  BaseDamage: 15
   Level: 0
-  coolDown: 0
+  _cooldown: 0
   animator: {fileID: 2179246506923068202}
+  _radius: 0.5
+  _centerWeapon: {fileID: 1275040292246033978}
 --- !u!95 &2179246506923068202
 Animator:
   serializedVersion: 7
@@ -1625,6 +1658,7 @@ Transform:
   - {fileID: 4355861746217877426}
   - {fileID: 403536156264438800}
   - {fileID: 7260777719855394649}
+  - {fileID: 1275040292246033978}
   m_Father: {fileID: 1195366237288431380}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -105}
 --- !u!1 &4281595351408356267
@@ -1982,7 +2016,7 @@ MonoBehaviour:
   WeaponData: {fileID: 11400000, guid: 79095b9197183d64c902fe76d0f35518, type: 2}
   BaseDamage: 0
   Level: 0
-  coolDown: 0
+  _cooldown: 0
   animator: {fileID: 2401323369787890671}
 --- !u!95 &2401323369787890671
 Animator:
@@ -2484,10 +2518,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bow
   WeaponData: {fileID: 11400000, guid: f4601f352bfdcf34a971c2cffb6a3a4a, type: 2}
-  BaseDamage: 0
+  BaseDamage: 25
   Level: 0
-  coolDown: 0
+  _cooldown: 0
   animator: {fileID: 5718682337295637055}
+  _normalArrowPrefab: {fileID: 2540662388258228287, guid: 88a3390d0d64c6c49839dbefda10b0c9, type: 3}
+  _specialArrowPrefab: {fileID: 4158976211750519056, guid: 1ab8300ae9668fb4a800e2d319a6e15f, type: 3}
+  _aimingTransform: {fileID: 6609570797386171866}
 --- !u!95 &5718682337295637055
 Animator:
   serializedVersion: 7

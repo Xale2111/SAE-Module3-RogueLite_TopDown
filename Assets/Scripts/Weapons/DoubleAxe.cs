@@ -31,7 +31,7 @@ public class DoubleAxe : Weapon
 
     private void CheckCollision()
     {
-        RaycastHit2D cast = Physics2D.CircleCast(_centerWeapon.position,_radius,Vector2.one);
+        RaycastHit2D cast = Physics2D.CircleCast(_centerWeapon.position,_radius,Vector2.zero);
 
         if(cast && cast.collider.TryGetComponent(out EnemyInstance enemy))
         {
