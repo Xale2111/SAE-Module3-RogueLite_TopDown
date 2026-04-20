@@ -30,7 +30,7 @@ namespace FSM
             _react.Context = _context;
             
             _fsmMachine.AddAnyTransition(() => _context.EnemyInstance.GetHealth() <= 0,_die); // => IF HP <= 0
-            //_fsmMachine.AddAnyTransition(() => ,_hit); //=> IF TOOK DAMAGE            
+            _fsmMachine.AddAnyTransition(() => _context.EnemyInstance.IsBeingHit ,_hit); //=> IF TOOK DAMAGE            
             
             _fsmMachine.AddTransition(_hit, ()=>true,_idle); //When Hit, go back to idle
             

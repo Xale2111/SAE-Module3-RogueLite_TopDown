@@ -38,7 +38,6 @@ public class Arrow : MonoBehaviour
     }
 
     public virtual void Attack(EnemyInstance enemy)
-    { 
-        
+    {         
     }
 }

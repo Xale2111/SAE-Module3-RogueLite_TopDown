@@ -13,6 +13,7 @@ public class EnemyInstance : MonoBehaviour
     private int _damage = 1;
 
     public bool IsStunned = false;
+    public bool IsBeingHit = false;
 
     private void Start()
     {        
@@ -44,7 +45,11 @@ public class EnemyInstance : MonoBehaviour
 
     public void TakeDamage(int damageDelt)
     {
-        _health -= damageDelt;
+        if (!IsBeingHit)
+        {
+            _health -= damageDelt;
+            IsBeingHit = true;
+        }
     }
 
     public void Stun(float stunDuration)

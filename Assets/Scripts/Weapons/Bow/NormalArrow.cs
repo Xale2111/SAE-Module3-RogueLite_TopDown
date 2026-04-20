@@ -9,7 +9,7 @@ namespace Assets.Scripts.Weapons.Bow
     public class NormalArrow : Arrow
     {
         public override void Attack(EnemyInstance enemy)
-        {
+        {            
             enemy.TakeDamage(Damage);
         }       
     }

@@ -5,12 +5,13 @@ using UnityEngine;
 public class Context : MonoBehaviour
 {
     [SerializeField] private EnemyInstance _enemyInstance;    
-    [SerializeField] private float _rotationSpeed = 10f;    
+    [SerializeField] private float _rotationSpeed = 10f;
+    [SerializeField] private float _hitTime = 0.2f;
 
     private PlayerController _player;    
     private Rigidbody2D _rigidbody;
 
-
+    public float HitTime => _hitTime;
     public Transform GetPlayerTransform => _player.transform;
     
     public Transform SelfTransform => transform;    

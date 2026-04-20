@@ -11,7 +11,7 @@ namespace Assets.Scripts.Weapons.Bow
         public float StunDuration;
 
         public override void Attack(EnemyInstance enemy)
-        {
+        {            
             enemy.Stun(StunDuration);
         }
     }

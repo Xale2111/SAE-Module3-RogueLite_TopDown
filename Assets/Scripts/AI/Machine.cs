@@ -106,8 +106,7 @@ namespace FSM
                     }
                 }
             }
-            
-            Debug.Log("Current State: " + _currentState);
+                       
         }
     }
 }
