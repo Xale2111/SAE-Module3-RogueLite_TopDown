@@ -6,9 +6,7 @@ public class Weapon : MonoBehaviour
 {
     public Weapon_SO WeaponData;
     public int BaseDamage;
-    public int Level;
-    [SerializeField] protected float _cooldown;
-
+    public int Level;    
     [SerializeField] protected Animator animator;
 
     public Weapon Equip()

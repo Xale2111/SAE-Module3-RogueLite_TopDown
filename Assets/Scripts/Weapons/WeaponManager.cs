@@ -27,9 +27,7 @@ public class WeaponManager : MonoBehaviour
         {
             if (context.ReadValueAsButton())
             {
-
                 CurrentWeapon.LeftClick();
-
             }
             else
             {
@@ -40,9 +38,9 @@ public class WeaponManager : MonoBehaviour
 
     public void RightClick(InputAction.CallbackContext context)
     {
-        if (context.ReadValueAsButton())
+        if (CurrentWeapon != null)
         {
-            if (CurrentWeapon != null)
+            if (context.ReadValueAsButton())
             {
                 CurrentWeapon.RightClick();
             }
