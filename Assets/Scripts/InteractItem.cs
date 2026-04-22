@@ -14,8 +14,7 @@ public class InteractItem : MonoBehaviour
         if (collision.TryGetComponent(out PlayerController player))
         {
             if (player.Interacted)
-            {                
-                             
+            {               
                 OnPickUp();
                 player.Interacted = false;
             }

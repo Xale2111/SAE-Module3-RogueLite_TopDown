@@ -14,7 +14,19 @@ public class WeaponPickUp : InteractItem
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        weaponDocument = FindFirstObjectByType<UIDocument>();
+
+        var UIDocs = FindObjectsByType<UIDocument>(FindObjectsSortMode.None);
+        foreach (var doc in UIDocs)
+        {
+            if (doc.CompareTag("UI_WeaponDetails"))
+            {
+                weaponDocument = doc;
+                break;
+            }
+        }
+
+        
+        
         weaponManager = FindFirstObjectByType<WeaponManager>();
         weaponDocument.rootVisualElement.visible = false;
 

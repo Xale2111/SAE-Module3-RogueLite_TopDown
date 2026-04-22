@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Weapons.Bow
 {
-    public class StunArrow : Arrow
+    public class NormalThrowable : Throwable
     {
-        public float StunDuration;
-
         public override void Attack(EnemyInstance enemy)
         {            
-            enemy.Stun(StunDuration);
-        }
+            enemy.TakeDamage(Damage);
+        }       
     }
 }

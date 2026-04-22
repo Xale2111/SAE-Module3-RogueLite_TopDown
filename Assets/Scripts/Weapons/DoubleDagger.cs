@@ -7,6 +7,8 @@ public class DoubleDagger : Weapon
     [SerializeField] float _radius;
     [SerializeField] Transform _leftDagger;    
     [SerializeField] Transform _rightDagger;    
+    
+    [SerializeField] GameObject _throwableDagger;
 
     bool _isAttacking = false;
 
@@ -35,6 +37,25 @@ public class DoubleDagger : Weapon
 
      */
 
+    public void ThrowDagger()
+    {
+        SpawnDagger(_leftDagger.up, _leftDagger.position);
+        SpawnDagger(_rightDagger.up, _rightDagger.position);
+    }
+
+    private void SpawnDagger(Vector3 direction, Vector3 spawnPosition)
+    {
+        // Pour un jeu 2D, calculer l'angle avec Atan2
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg-90;
+        Quaternion aimDirection = Quaternion.Euler(0, 0, angle);
+
+        GameObject throwableDagger = _throwableDagger;
+        Throwable throwableStat = throwableDagger.GetComponent<Throwable>();
+        throwableStat.SetDamage(GetDamage());
+
+        Instantiate(throwableDagger, spawnPosition, aimDirection);
+    }
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.rebeccaPurple;

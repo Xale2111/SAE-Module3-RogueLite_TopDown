@@ -46,8 +46,8 @@ public class Bow : Weapon
         Quaternion aimDirection = Quaternion.Euler(0, 0, angle);
 
         GameObject newArrow = arrowPrefab;
-        Arrow arrowStat = newArrow.GetComponent<Arrow>();
-        arrowStat.SetDamage(GetDamage());
+        Throwable throwableStat = newArrow.GetComponent<Throwable>();
+        throwableStat.SetDamage(GetDamage());
 
         Instantiate(newArrow, transform.position, aimDirection);
     }

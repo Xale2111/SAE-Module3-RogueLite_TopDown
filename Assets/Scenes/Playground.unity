@@ -13067,7 +13067,7 @@ GameObject:
   - component: {fileID: 814408987}
   m_Layer: 5
   m_Name: UI_WeaponDetails
-  m_TagString: Untagged
+  m_TagString: UI_WeaponDetails
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13087,7 +13087,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: 54fa3751c69b8094ea0ab84591c418a9, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 7511199db4e65434e9940d6738eb3729, type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Position: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
@@ -14070,7 +14070,7 @@ GameObject:
   - component: {fileID: 1536365748}
   - component: {fileID: 1536365747}
   - component: {fileID: 1536365749}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26193,6 +26193,61 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e67d65ecfe0da344fa8a57262264d45e, type: 3}
+--- !u!1 &1721284686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1721284688}
+  - component: {fileID: 1721284687}
+  m_Layer: 5
+  m_Name: UI_PlayerInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1721284687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721284686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 54fa3751c69b8094ea0ab84591c418a9, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: eca8185a0aca6ed4b9d35b9251313ec2, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!4 &1721284688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721284686}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2067986303
 GameObject:
   m_ObjectHideFlags: 0
@@ -26423,6 +26478,10 @@ PrefabInstance:
       propertyPath: _rightDagger
       value: 
       objectReference: {fileID: 1299901567}
+    - target: {fileID: 1492050201936884762, guid: 7feac2b81172c8148b7170245df5afc1, type: 3}
+      propertyPath: _throwableDagger
+      value: 
+      objectReference: {fileID: 7329028004305486287, guid: 6543845ed4cc11c44ba0128fc551fe5d, type: 3}
     - target: {fileID: 1688484220507260239, guid: 7feac2b81172c8148b7170245df5afc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -26497,6 +26556,7 @@ SceneRoots:
   - {fileID: 3525779533298573808}
   - {fileID: 763435833}
   - {fileID: 814408988}
+  - {fileID: 1721284688}
   - {fileID: 559847260}
   - {fileID: 1366930648}
   - {fileID: 604935076}

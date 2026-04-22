@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
+public class Throwable : MonoBehaviour
 {
     public int Damage;
 
@@ -23,6 +23,13 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Walls"))
+        {
+            _speed = 0;
+            Destroy(_collider);
+            Destroy(gameObject,4f);
+        }
+        
         if (collision.TryGetComponent(out EnemyInstance enemy))
         {
             Attack(enemy);
@@ -31,6 +38,7 @@ public class Arrow : MonoBehaviour
             Destroy(_collider);
             Destroy(gameObject,4f);
         }
+        
     }
     public void SetDamage(int newDamage)
     {
