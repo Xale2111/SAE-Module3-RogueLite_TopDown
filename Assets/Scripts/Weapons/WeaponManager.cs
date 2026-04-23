@@ -1,24 +1,39 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class WeaponManager : MonoBehaviour
 {   
-    [SerializeField] GameObject[] equipedWeapons;    
+    [SerializeField] GameObject[] equipedWeapons;
+    [SerializeField] private UIDocument playerDataUI;
+    [SerializeField] private UIDocument weaponPickUpDataUI;
 
+    
+    //WeaponDisplaySprite
+    
+    
     public GameObject CurrentWeaponGO;
     public Weapon CurrentWeapon;
     int currentMaxLevel = 1;
 
+    private VisualElement equippedWeaponVisualElement;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        equippedWeaponVisualElement = playerDataUI.rootVisualElement.Query("WeaponDisplay").First();
+        
         foreach (GameObject weaponsGO in equipedWeapons)
         {
             weaponsGO.SetActive(false);
         }
         CurrentWeapon = GetRandomWeapon().Equip();
         CurrentWeaponGO = CurrentWeapon.gameObject;
-        currentMaxLevel++;   
+        currentMaxLevel++;
+        
+        equippedWeaponVisualElement.dataSource = CurrentWeapon;
+
+        HidePickUpWeapon();
     }
 
     public void LeftClick(InputAction.CallbackContext context)
@@ -46,7 +61,7 @@ public class WeaponManager : MonoBehaviour
             }
         }
     }
-
+    
     public Weapon GetRandomWeapon()
     {
         var newWeapon = equipedWeapons[Random.Range(0, equipedWeapons.Length)];
@@ -54,6 +69,17 @@ public class WeaponManager : MonoBehaviour
         return newWeapon.GetComponent<Weapon>();
     }
 
+    public void DisplayPickUpWeapon(Weapon pickUpWeapon)
+    {
+        weaponPickUpDataUI.gameObject.SetActive(true);
+        weaponPickUpDataUI.rootVisualElement.dataSource = pickUpWeapon;
+    }
+        
+    public void HidePickUpWeapon()
+    {
+        weaponPickUpDataUI.gameObject.SetActive(false);
+    }
+    
     public void EquipCurrentWeapon()
     {
         CurrentWeaponGO.SetActive(false);
@@ -61,7 +87,9 @@ public class WeaponManager : MonoBehaviour
         CurrentWeapon = CurrentWeapon.Equip();
         CurrentWeaponGO = CurrentWeapon.gameObject;
         CurrentWeaponGO.SetActive(true);
-
+        
+        equippedWeaponVisualElement.dataSource = CurrentWeapon;
+        
     }
 
 }

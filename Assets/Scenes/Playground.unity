@@ -26530,6 +26530,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7084420940814009244, guid: 7feac2b81172c8148b7170245df5afc1, type: 3}
+      propertyPath: playerDataUI
+      value: 
+      objectReference: {fileID: 1721284687}
+    - target: {fileID: 7084420940814009244, guid: 7feac2b81172c8148b7170245df5afc1, type: 3}
+      propertyPath: weaponPickUpDataUI
+      value: 
+      objectReference: {fileID: 814408987}
+    - target: {fileID: 7517699803901584233, guid: 7feac2b81172c8148b7170245df5afc1, type: 3}
+      propertyPath: maxHp
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517699803901584233, guid: 7feac2b81172c8148b7170245df5afc1, type: 3}
+      propertyPath: playerDataUI
+      value: 
+      objectReference: {fileID: 1721284687}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

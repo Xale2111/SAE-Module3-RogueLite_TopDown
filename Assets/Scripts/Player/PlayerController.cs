@@ -1,23 +1,29 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float protectedSpeed = 1.5f;
+    [SerializeField] private int maxHp = 120;
     [SerializeField] private GameObject aimLookAt;
     [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private UIDocument playerDataUI;
+    
     
     private Rigidbody2D rb;
     private float _interactCooldown = 0.5f;
 
-    private int _hp = 100;
+    public int hp = 100;
+    [HideInInspector] public float hpBarFill = 100;
 
+    private VisualElement hpBarValue;
 
     Vector2 move;
 
-    public bool Interacted =false;
+    public bool Interacted = false;
     private bool _canInteract = true;
 
     public bool IsProtected = false;
@@ -25,14 +31,30 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();        
+        rb = GetComponent<Rigidbody2D>();
+        hp = maxHp;
+        
+        VisualElement playerHealth = playerDataUI.rootVisualElement.Query("Health").First();
+        playerHealth.dataSource = this;
+        
+        hpBarValue = playerDataUI.rootVisualElement.Query("HPBar_Value").First();
+        
+        UpdateHealthBar();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Protection is : " + IsProtected);
+        float previousHpBarFill = hpBarFill;
+        hpBarFill = ((float)hp / maxHp) * 100; 
+        
+        // Mettre à jour la barre seulement si la valeur a changé
+        if (previousHpBarFill != hpBarFill)
+        {
+            UpdateHealthBar();
+        }
     }
+    
     void FixedUpdate()
     {
         float currentSpeed = IsProtected ? protectedSpeed : speed;
@@ -64,7 +86,6 @@ public class PlayerController : MonoBehaviour
             if (context.ReadValueAsButton())
             {
                 Interacted = true;
-                Debug.Log("Interact");
             }
             else
             {
@@ -78,7 +99,27 @@ public class PlayerController : MonoBehaviour
     {
         if (!IsProtected)
         {
-            _hp -= damageToDeal;
+            hp -= damageToDeal;
+            UpdateHealthBar();
+        }
+    }
+    
+    public int GetHp()
+    {
+        return hp;
+    }
+    
+    public int GetMaxHp()
+    {
+        return maxHp;
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (hpBarValue != null)
+        {
+            float healthRatio = Mathf.Clamp01((float)hp / maxHp);
+            hpBarValue.style.width = new StyleLength(new Length(healthRatio * 100f, LengthUnit.Percent));
         }
     }
 

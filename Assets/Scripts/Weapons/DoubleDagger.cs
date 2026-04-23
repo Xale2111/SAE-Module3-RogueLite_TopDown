@@ -15,6 +15,7 @@ public class DoubleDagger : Weapon
     private bool _hand;
     public override void LeftClick()
     {
+        _isAttacking = true;
         _hand = Random.value < 0.5f ? true : false;
         animator.SetBool("AttackingHand", _hand);
         animator.SetTrigger("MainAttack");
@@ -26,16 +27,11 @@ public class DoubleDagger : Weapon
         animator.SetTrigger("SecondAttack");
         Debug.Log("Second attack Double Dagger");
     }
-
-    /*
-     Add method in animation to set isAttackin = true;
-     Add method in animation to set isAttackin = false;
-
-    Check collisions depending on hand
-    Create ThrowableDagger item that will be shoot when second attack
-    (add a method in animation for the launch)
-
-     */
+    
+    public void EndAttacking()
+    { 
+        _isAttacking = false;
+    }
 
     public void ThrowDagger()
     {
