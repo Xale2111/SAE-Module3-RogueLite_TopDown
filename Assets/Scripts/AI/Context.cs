@@ -30,6 +30,7 @@ public class Context : MonoBehaviour
         if (!_enemyInstance.IsStunned)
         {
             SelfRigidbody.linearVelocity = direction.normalized * EnemyStat.MoveSpeed;
+            _rigidbody.constraints = RigidbodyConstraints2D.None;
 
             LookAt(direction);
         }
@@ -87,6 +88,7 @@ public class Context : MonoBehaviour
     public void StopMove()
     { 
         _rigidbody.linearVelocity = Vector3.zero;
+        _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     public void KillEntity()

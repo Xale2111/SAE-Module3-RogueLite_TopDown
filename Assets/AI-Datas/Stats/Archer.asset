@@ -15,7 +15,7 @@ MonoBehaviour:
   MoveSpeed: 2.75
   FleeSpeed: 3.5
   Health: 100
-  Damage: 10
+  Damage: 15
   Weight: 1
   DetectionRadius: 7
   AttackRange: 5.25

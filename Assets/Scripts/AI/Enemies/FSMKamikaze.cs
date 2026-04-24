@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace FSM
 {
@@ -40,6 +41,16 @@ namespace FSM
             if (_context.IsPlayingAttackAnimation())
             {
                 _exploded = true;
+            }
+        }
+
+        public void Explode()
+        {
+            RaycastHit2D cast = Physics2D.CircleCast(_context.SelfTransform.position, _context.EnemyStat.ExplosionRange, Vector2.zero);            
+
+            if (cast && cast.collider.TryGetComponent(out PlayerController player))
+            {
+                player.TakeDamage(_context.EnemyStat.Damage);
             }
         }
     }
