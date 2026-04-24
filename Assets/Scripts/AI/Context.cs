@@ -42,9 +42,17 @@ public class Context : MonoBehaviour
 
     public void FleeTo(Vector3 direction)
     {
-        SelfRigidbody.linearVelocity = direction.normalized * EnemyStat.FleeSpeed;
+        if (!_enemyInstance.IsStunned)
+        {
+            SelfRigidbody.linearVelocity = direction.normalized * EnemyStat.FleeSpeed;
+            _rigidbody.constraints = RigidbodyConstraints2D.None;
 
-        LookAt(direction);
+            LookAt(direction);
+        }
+        else
+        {
+            StopMove();
+        }        
     }
 
     public void LaunchAttackAnimation()

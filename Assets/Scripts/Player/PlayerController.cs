@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float protectedSpeed = 1.5f;
     [SerializeField] private int maxHp = 120;
+    [SerializeField] private float invincibilityDuration = 0.5f;
     [SerializeField] private GameObject aimLookAt;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private UIDocument playerDataUI;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public bool Interacted = false;
     private bool _canInteract = true;
 
+    private bool _isInvincible = false;
     public bool IsProtected = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -89,14 +91,22 @@ public class PlayerController : MonoBehaviour
     }
 
     public void TakeDamage(int damageToDeal)
-    {        
-        if (!IsProtected)
+    {
+        if (!IsProtected && !_isInvincible)
         {
             hp -= damageToDeal;
             UpdateHealthBar();
+            StartCoroutine(InvincibilityFrames());
         }
     }
-    
+
+    private IEnumerator InvincibilityFrames()
+    {
+        _isInvincible = true;
+        yield return new WaitForSeconds(invincibilityDuration);
+        _isInvincible = false;
+    }
+
     public int GetHp()
     {
         return hp;
