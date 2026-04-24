@@ -19,7 +19,7 @@ public class DoubleDagger : Weapon
         _hand = Random.value < 0.5f ? true : false;
         animator.SetBool("AttackingHand", _hand);
         animator.SetTrigger("MainAttack");
-        Debug.Log("First attack Double Dagger");
+        Debug.Log("First attack Double Dagger : " + _hand);
     }
 
     public override void RightClick()
@@ -27,7 +27,15 @@ public class DoubleDagger : Weapon
         animator.SetTrigger("SecondAttack");
         Debug.Log("Second attack Double Dagger");
     }
-    
+
+    private void Update()
+    {
+        if (_isAttacking)
+        {
+            CheckCollision();
+        }
+    }
+
     public void EndAttacking()
     { 
         _isAttacking = false;
@@ -37,6 +45,19 @@ public class DoubleDagger : Weapon
     {
         SpawnDagger(_leftDagger.up, _leftDagger.position);
         SpawnDagger(_rightDagger.up, _rightDagger.position);
+    }
+
+    private void CheckCollision()
+    {
+        Transform handPosition = _hand ? _leftDagger : _rightDagger;
+
+        RaycastHit2D cast = Physics2D.CircleCast(handPosition.position, _radius, Vector2.zero);
+
+        if (cast && cast.collider.TryGetComponent(out EnemyInstance enemy))
+        {
+            Debug.Log($"Dealing damage : {GetDamage()} to {enemy.name}");
+            enemy.TakeDamage(GetDamage());
+        }
     }
 
     private void SpawnDagger(Vector3 direction, Vector3 spawnPosition)
