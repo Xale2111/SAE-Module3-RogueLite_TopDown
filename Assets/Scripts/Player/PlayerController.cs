@@ -45,14 +45,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float previousHpBarFill = hpBarFill;
-        hpBarFill = ((float)hp / maxHp) * 100; 
-        
-        // Mettre à jour la barre seulement si la valeur a changé
-        if (previousHpBarFill != hpBarFill)
-        {
-            UpdateHealthBar();
-        }
+      
     }
     
     void FixedUpdate()
@@ -96,7 +89,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void TakeDamage(int damageToDeal)
-    {
+    {        
         if (!IsProtected)
         {
             hp -= damageToDeal;

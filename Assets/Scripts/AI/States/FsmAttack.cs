@@ -7,11 +7,12 @@ namespace FSM.States
         public void Enter()
         {
             Debug.Log("ATTACKING");
-            Context.StopMove();
+            Context.StopMove();         
         }
 
         public void Tick()
         {
+            Context.LaunchAttackAnimation();
             Context.LookAt(Context.GetPlayerTransform.position-Context.SelfTransform.position);
         }
 

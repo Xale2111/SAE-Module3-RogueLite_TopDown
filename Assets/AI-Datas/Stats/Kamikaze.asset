@@ -20,3 +20,4 @@ MonoBehaviour:
   DetectionRadius: 6
   AttackRange: 0.75
   FleeRange: 0
+  ExplosionRange: 3.5

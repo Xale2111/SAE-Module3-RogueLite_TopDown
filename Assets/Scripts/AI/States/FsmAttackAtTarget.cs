@@ -25,8 +25,9 @@ namespace FSM.States
             }
             else
             {
-                Debug.Log("ATTACKING");
                 Context.StopMove();
+                Debug.Log("ATTACKING");
+                Context.LaunchAttackAnimation();
             }
         }
 

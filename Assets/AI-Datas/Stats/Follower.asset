@@ -18,5 +18,5 @@ MonoBehaviour:
   Damage: 1
   Weight: 0
   DetectionRadius: 0
-  AttackRange: 0.4
+  AttackRange: 0.5
   FleeRange: 3

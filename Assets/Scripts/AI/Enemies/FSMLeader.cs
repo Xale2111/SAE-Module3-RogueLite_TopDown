@@ -29,8 +29,8 @@ namespace FSM
             _fsmMachine.AddTransition(_patrol, () => CheckPlayerSeen() && _sawPlayerOnce, _chase); //IF PLAYER IN CHASE RANGE AND KNOW PLAYER == TRUE
             _fsmMachine.AddTransition(_chase, () => !CheckPlayerSeen(), _patrol); //LOST PLAYER
             _fsmMachine.AddTransition(_chase, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange), _attack); //IF PLAYER IN ATTACK RANGE
-            _fsmMachine.AddTransition(_attack, () => !CheckPlayerSeen(), _patrol); //LOST PLAYER
-            _fsmMachine.AddTransition(_attack, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange) && CheckPlayerSeen(), _chase);// PLAYER NOT IN ATTACK RANGE            
+            _fsmMachine.AddTransition(_attack, () => !_context.IsPlayingAttackAnimation() && !CheckPlayerSeen(), _patrol); //LOST PLAYER
+            _fsmMachine.AddTransition(_attack, () => !_context.IsPlayingAttackAnimation() && !_context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange) && CheckPlayerSeen(), _chase);// PLAYER NOT IN ATTACK RANGE            
         }
 
         protected override void OnUpdate()

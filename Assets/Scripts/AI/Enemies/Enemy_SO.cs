@@ -11,6 +11,5 @@ public class Enemy_SO : ScriptableObject
     [SerializeField] public float DetectionRadius;
     [SerializeField] public float AttackRange;
     [SerializeField] public float FleeRange;
-    
-    protected Animator animator;
+    [SerializeField] public float ExplosionRange;
 }

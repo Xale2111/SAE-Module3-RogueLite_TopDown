@@ -5,8 +5,11 @@ public class Throwable : MonoBehaviour
     public int Damage;
 
     [SerializeField] private float _speed;
+    [SerializeField] private bool _hitsPlayer; //false = damage enemies, true = damage player
+
     private Rigidbody2D _rigidbody;
     private Collider2D _collider;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,14 +32,29 @@ public class Throwable : MonoBehaviour
             Destroy(_collider);
             Destroy(gameObject,4f);
         }
-        
-        if (collision.TryGetComponent(out EnemyInstance enemy))
+
+        if (_hitsPlayer)
         {
-            Attack(enemy);
-            _speed = 0;
-            gameObject.transform.SetParent(enemy.transform);
-            Destroy(_collider);
-            Destroy(gameObject,4f);
+            if (collision.TryGetComponent(out PlayerController player))
+            {
+                AttackPlayer(player);
+                _speed = 0;
+                gameObject.transform.SetParent(player.transform);
+                Destroy(_collider);
+                Destroy(gameObject, 4f);
+            }
+        }
+        else
+        {
+
+            if (collision.TryGetComponent(out EnemyInstance enemy))
+            {
+                AttackEnemy(enemy);
+                _speed = 0;
+                gameObject.transform.SetParent(enemy.transform);
+                Destroy(_collider);
+                Destroy(gameObject, 4f);
+            }
         }
         
     }
@@ -45,7 +63,11 @@ public class Throwable : MonoBehaviour
         Damage = newDamage;
     }
 
-    public virtual void Attack(EnemyInstance enemy)
+    public virtual void AttackEnemy(EnemyInstance enemy)
     {         
+    }
+
+    public virtual void AttackPlayer(PlayerController player)
+    {
     }
 }

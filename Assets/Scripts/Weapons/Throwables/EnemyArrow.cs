@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Weapons.Bow
 {
-    public class NormalThrowable : Throwable
+    public class EnemyArrow : Throwable
     {
-        public override void AttackEnemy(EnemyInstance enemy)
-        {            
-            enemy.TakeDamage(Damage);
+        public override void AttackPlayer(PlayerController player)
+        {
+            player.TakeDamage(Damage);
         }       
     }
 }
