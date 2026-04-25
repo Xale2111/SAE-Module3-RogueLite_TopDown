@@ -43,8 +43,10 @@ public class MapGenerator : MonoBehaviour
     List<NormalRoom> normalRooms = new List<NormalRoom>();
     List<GameObject> bonusRoomObjects = new List<GameObject>();
     
-    private int currentCorridor = 0;    
-    
+    private int currentCorridor = 0;
+
+    public int GetMaxRoom => generatedMaxBaseRooms;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     { 
@@ -233,7 +235,7 @@ public class MapGenerator : MonoBehaviour
             DrawCorridor(floorMap,floorTile,corridor.start,corridor.end,corridor.width,corridor.type);
             DrawCorridor(wallsMap,wallsTile,corridor.start,corridor.end,corridor.width,corridor.type);
             currentCorridor++;
-            if (corridors[currentCorridor].isBonus && currentCorridor < corridors.Count)
+            if (currentCorridor < corridors.Count - 1 && corridors[currentCorridor].isBonus)
             {
                 DrawNextCorridor();
             }
@@ -242,23 +244,13 @@ public class MapGenerator : MonoBehaviour
 
     public void DeleteLastCorridor()
     {
-        if (currentCorridor < corridors.Count)
+        if (currentCorridor <= corridors.Count)
         {
             //If bonus corridor, delete 2 before 
-            if (corridors[currentCorridor - 1].isBonus)
-            {
-                Corridor corridor = corridors[currentCorridor-2];
-                DeleteCorridor(floorMap, corridor.start, corridor.end, corridor.width, corridor.type);
-                DeleteCorridor(wallsMap, corridor.start, corridor.end, corridor.width, corridor.type);
-                DeleteLastCorridor();
-            }
-            else
-            {
-                Corridor corridor = corridors[currentCorridor - 1];
-                DeleteCorridor(floorMap, corridor.start, corridor.end, corridor.width, corridor.type);
-                DeleteCorridor(wallsMap, corridor.start, corridor.end, corridor.width, corridor.type);
+            Corridor corridor = corridors[currentCorridor-1].isBonus ? corridors[currentCorridor - 2] : corridors[currentCorridor - 1];
 
-            }
+            DeleteCorridor(floorMap, corridor.start, corridor.end, corridor.width, corridor.type);
+            DeleteCorridor(wallsMap, corridor.start, corridor.end, corridor.width, corridor.type);
         }
     }
 

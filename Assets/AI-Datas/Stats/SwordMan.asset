@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: SwordMan
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_SO
   MoveSpeed: 1.5
-  Health: 100
-  Damage: 5
+  FleeSpeed: 0
+  Health: 150
+  Damage: 21
   Weight: 1
+  MaxAmountPerRoom: 999
   DetectionRadius: 5
   AttackRange: 1.1
   FleeRange: 0
+  ExplosionRange: 0

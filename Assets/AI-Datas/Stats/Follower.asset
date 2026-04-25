@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_SO
   MoveSpeed: 2
   FleeSpeed: 5
-  Health: 50
+  Health: 40
   Damage: 5
   Weight: 0
+  MaxAmountPerRoom: 0
   DetectionRadius: 0
   AttackRange: 0.5
   FleeRange: 3

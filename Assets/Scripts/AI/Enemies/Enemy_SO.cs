@@ -8,6 +8,7 @@ public class Enemy_SO : ScriptableObject
     [SerializeField] public int Health;
     [SerializeField] public int Damage;
     [SerializeField] public float Weight;
+    [SerializeField] public int MaxAmountPerRoom;
     [SerializeField] public float DetectionRadius;
     [SerializeField] public float AttackRange;
     [SerializeField] public float FleeRange;

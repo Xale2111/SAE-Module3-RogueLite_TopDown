@@ -20,7 +20,8 @@ public class Context : MonoBehaviour
     
     public Rigidbody2D SelfRigidbody => _rigidbody;    
 
-    public BoundsInt GetRoomBounds() => RoomManager.GetCurrentRoomBounds();
+    public BoundsInt GetRoomBounds() => RoomManager.GetCurrentRoomBounds();    
+
 
     public Enemy_SO EnemyStat => _enemyInstance.GetEnemyBaseStat();   
     public EnemyInstance EnemyInstance => _enemyInstance;

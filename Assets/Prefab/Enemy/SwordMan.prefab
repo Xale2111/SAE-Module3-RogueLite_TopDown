@@ -331,8 +331,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6361430076811572996}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.96894807, w: 0.24726458}
-  m_LocalPosition: {x: 0.02772808, y: 0.61586815, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.003, y: 0.606, z: 0}
   m_LocalScale: {x: 0.7692304, y: 0.7692304, z: 0.7692308}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -668,7 +668,7 @@ Transform:
   m_GameObject: {fileID: 8791154795730887071}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -767,8 +767,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FSM.FSMSwordman
   _context: {fileID: 7069560717998367526}
-  weaponCenter: {fileID: 0}
-  weaponRadius: 0
+  weaponCenter: {fileID: 7419821028180288812}
+  weaponSize: {x: 0.3, y: 0.9, z: 1}
 --- !u!114 &6724669301276117894
 MonoBehaviour:
   m_ObjectHideFlags: 0

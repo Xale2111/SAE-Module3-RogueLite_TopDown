@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float protectedSpeed = 1.5f;
-    [SerializeField] private int maxHp = 120;
+    [SerializeField] private int maxHp = 100;
     [SerializeField] private float invincibilityDuration = 0.5f;
     [SerializeField] private GameObject aimLookAt;
     [SerializeField] private float rotationSpeed = 10f;
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float _interactCooldown = 0.5f;
 
-    public int hp = 100;
+    [HideInInspector] public int hp = 100;
     [HideInInspector] public float hpBarFill = 100;
 
     private VisualElement hpBarValue;

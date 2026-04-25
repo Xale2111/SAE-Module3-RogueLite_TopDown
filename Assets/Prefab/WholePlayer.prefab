@@ -726,6 +726,7 @@ MonoBehaviour:
   speed: 5
   protectedSpeed: 1.5
   maxHp: 120
+  invincibilityDuration: 0.3
   aimLookAt: {fileID: 1910239495298363618}
   rotationSpeed: 10
   playerDataUI: {fileID: 0}

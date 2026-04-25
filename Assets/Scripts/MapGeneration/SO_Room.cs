@@ -8,7 +8,7 @@ namespace Rooms
         public RoomType type;
         public SO_RoomSizeType sizeType;   
         public string name;
-        public int ID;
+        
         
         public Vector2Int GetSize()
         {
