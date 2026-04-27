@@ -15,7 +15,6 @@ MonoBehaviour:
   type: 0
   sizeType: {fileID: 11400000, guid: 6b5ac52511adad442a22c800443a85b3, type: 2}
   name: Medium
-  center: {x: 245, y: 0}
   Links:
   - Weight: 2
     soRoom: {fileID: 11400000, guid: 5d7513fb5119704458b677e8a132577f, type: 2}
@@ -28,3 +27,5 @@ MonoBehaviour:
     soRoom: {fileID: 11400000, guid: 245e338088c165645aea306562146a4c, type: 2}
   - Weight: 2
     soRoom: {fileID: 11400000, guid: 5932d12f8b8a6f24fb8f85f7fbb04960, type: 2}
+  MinEnemyWeight: 6
+  MaxEnemyWeight: 10.5

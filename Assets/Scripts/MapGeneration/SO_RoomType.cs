@@ -35,7 +35,9 @@ namespace Rooms
     {
         public List<Link> Links;
         public List<BonusLink> BonusRoomLinks;
-        
+        public float MinEnemyWeight;
+        public float MaxEnemyWeight;
+
         public SO_RoomType NextRoom()
         {
             if (Links.Count > 0)

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
@@ -12,7 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject aimLookAt;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private UIDocument playerDataUI;
-    
+
+    [SerializeField] private Transform startPosition;
     
     private Rigidbody2D rb;
     private float _interactCooldown = 0.5f;
@@ -42,14 +44,17 @@ public class PlayerController : MonoBehaviour
         hpBarValue = playerDataUI.rootVisualElement.Query("HPBar_Value").First();
         
         UpdateHealthBar();
+        SendPlayerToStartPosition();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-      
+        if (hp <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
-    
+
     void FixedUpdate()
     {
         float currentSpeed = IsProtected ? protectedSpeed : speed;
@@ -66,6 +71,11 @@ public class PlayerController : MonoBehaviour
                 rb.rotation = Mathf.LerpAngle(rb.rotation, angle, Time.deltaTime*rotationSpeed);
             }
         }
+    }
+
+    public void SendPlayerToStartPosition()
+    {
+        transform.position = startPosition.position;
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -131,5 +141,28 @@ public class PlayerController : MonoBehaviour
         _canInteract = false;
         yield return new WaitForSeconds(_interactCooldown);
         _canInteract = true;       
+    }
+
+    public void HealPlayerOfPercentage(float percentage)
+    {
+        hp += Mathf.RoundToInt((float)maxHp * (percentage / 100));
+        if (hp > maxHp)
+        { 
+            hp = maxHp;
+        }
+
+        UpdateHealthBar();
+    }
+
+    public void UpgradeMaxHP(int hpToAdd)
+    {
+        maxHp += hpToAdd;
+        hp += hpToAdd;
+        if (hp > maxHp)
+        {
+            hp = maxHp;
+        }
+
+        UpdateHealthBar();
     }
 }

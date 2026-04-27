@@ -386,10 +386,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShieldAndSpear
   WeaponData: {fileID: 11400000, guid: b8cba1d454da3ee48bd2ab23e4a4b946, type: 2}
-  BaseDamage: 0
+  BaseDamage: 25
   Level: 0
-  coolDown: 0
   animator: {fileID: 1309635764788878389}
+  _radius: 0
+  _centerSpear: {fileID: 0}
+  player: {fileID: 0}
 --- !u!95 &1309635764788878389
 Animator:
   serializedVersion: 7

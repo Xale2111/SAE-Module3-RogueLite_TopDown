@@ -56,5 +56,15 @@ namespace FSM
         {
             return _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius);
         }
+
+        public float GetWeight()
+        {
+            return _context.EnemyStat.Weight;
+        }
+
+        public int GetMaxAmountPerRoom()
+        { 
+            return _context.EnemyStat.MaxAmountPerRoom;
+        }
     }
 }

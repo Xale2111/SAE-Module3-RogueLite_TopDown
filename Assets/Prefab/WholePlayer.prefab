@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6421552170547097930
 Transform:
   m_ObjectHideFlags: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShieldAndSpear
   WeaponData: {fileID: 11400000, guid: b8cba1d454da3ee48bd2ab23e4a4b946, type: 2}
   BaseDamage: 25
-  Level: 0
+  Level: 1
   animator: {fileID: 4636866600625217467}
   _radius: 0.2
   _centerSpear: {fileID: 3572703378567497721}
@@ -725,7 +725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   speed: 5
   protectedSpeed: 1.5
-  maxHp: 120
+  maxHp: 100
   invincibilityDuration: 0.3
   aimLookAt: {fileID: 1910239495298363618}
   rotationSpeed: 10
@@ -1521,7 +1521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1195366237288431380
 Transform:
   m_ObjectHideFlags: 0
@@ -1551,8 +1551,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoubleAxe
   WeaponData: {fileID: 11400000, guid: 532933d5ca2d0a24e92f838568ddde69, type: 2}
-  BaseDamage: 15
-  Level: 0
+  BaseDamage: 28
+  Level: 1
   animator: {fileID: 2179246506923068202}
   _radius: 0.5
   _centerWeapon: {fileID: 1275040292246033978}
@@ -2057,8 +2057,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoubleDagger
   WeaponData: {fileID: 11400000, guid: 79095b9197183d64c902fe76d0f35518, type: 2}
-  BaseDamage: 28
-  Level: 0
+  BaseDamage: 23
+  Level: 1
   animator: {fileID: 2401323369787890671}
   _radius: 0.25
   _leftDagger: {fileID: 7323338045743778540}
@@ -2595,7 +2595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2511853629274538101
 Transform:
   m_ObjectHideFlags: 0
@@ -2627,8 +2627,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bow
   WeaponData: {fileID: 11400000, guid: f4601f352bfdcf34a971c2cffb6a3a4a, type: 2}
-  BaseDamage: 25
-  Level: 0
+  BaseDamage: 20
+  Level: 1
   animator: {fileID: 5718682337295637055}
   _normalArrowPrefab: {fileID: 2540662388258228287, guid: 88a3390d0d64c6c49839dbefda10b0c9, type: 3}
   _specialArrowPrefab: {fileID: 4158976211750519056, guid: 1ab8300ae9668fb4a800e2d319a6e15f, type: 3}

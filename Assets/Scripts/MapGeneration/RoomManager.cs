@@ -1,26 +1,28 @@
 ﻿using Rooms;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField] private Transform playerTransform;
+    [SerializeField] private PlayerController playerController;
     [SerializeField] private MapGenerator mapGenerator;
+    [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private float roomThreshold = .5f;
 
+
+    private Transform playerTransform;
     public static List<NormalRoom> roomsBounds;
     static int currentRoom = 0;
     static int nextRoom = 1;
 
+    private bool inFight = false;
+
     private void Start()
     {
-        if (playerTransform == null)
+        if (playerTransform == null || playerController == null)
         {
-            playerTransform = FindFirstObjectByType<PlayerController>().transform;
+            playerController = FindFirstObjectByType<PlayerController>();
+            playerTransform = playerController.transform;
         }
 
         if (mapGenerator == null)
@@ -38,11 +40,29 @@ public class RoomManager : MonoBehaviour
             mapGenerator.DeleteLastCorridor();           
             //Set New current room
             EnteredNewRoom();
+            playerController.HealPlayerOfPercentage(5);
             //Spawn enemies
+            enemyManager.SpawnEnemies(GetWeightForTheRoom());
+            inFight = true;
+            //EnemyManager -> Spawn enemies(GetWeight)            
         }
+
+        if (inFight && enemyManager.AreAllEnemiesDead())
+        {
+            mapGenerator.DrawNextCorridor();
+            inFight = false;
+            if (currentRoom == roomsBounds.Count-1)
+            {
+                NewFloor();
+            }
+        }
+        
     }
 
-
+    private float GetWeightForTheRoom()
+    {
+        return Random.Range(roomsBounds[currentRoom].RoomType.MinEnemyWeight, roomsBounds[currentRoom].RoomType.MaxEnemyWeight);
+    }
 
     public static BoundsInt GetCurrentRoomBounds()
     {
@@ -51,23 +71,23 @@ public class RoomManager : MonoBehaviour
     public static BoundsInt GetNextRoomBounds()
     {
         return roomsBounds[nextRoom].bounds;  
-    }
+    }    
 
     public static void EnteredNewRoom()
     {        
         currentRoom++;               
         nextRoom++;
-
     }
 
-    private void OnDrawGizmos()
-    {        
-        Gizmos.color = Color.darkSeaGreen;
-        if(nextRoom < roomsBounds.Count)
-            Gizmos.DrawLine(new Vector3(GetNextRoomBounds().position.x + roomThreshold, -100), new Vector3(GetNextRoomBounds().position.x + roomThreshold, 100));       
+    private void NewFloor()
+    {
+        playerController.SendPlayerToStartPosition();
+        mapGenerator.GoToNewDungeon();
+        playerController.HealPlayerOfPercentage(30);
+        playerController.UpgradeMaxHP(25);
+        currentRoom = 0;
+        nextRoom = 1;
     }
-
-
 
 }
 

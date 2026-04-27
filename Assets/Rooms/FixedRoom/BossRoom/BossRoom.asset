@@ -16,3 +16,6 @@ MonoBehaviour:
   sizeType: {fileID: 11400000, guid: 6d7cf733f2febe247b98ef2883c812a0, type: 2}
   name: Boss
   Links: []
+  BonusRoomLinks: []
+  MinEnemyWeight: 30
+  MaxEnemyWeight: 30

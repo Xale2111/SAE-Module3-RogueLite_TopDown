@@ -542,10 +542,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoubleDagger
   WeaponData: {fileID: 11400000, guid: 79095b9197183d64c902fe76d0f35518, type: 2}
-  BaseDamage: 0
+  BaseDamage: 23
   Level: 0
-  coolDown: 0
   animator: {fileID: 7465237384428354640}
+  _radius: 0
+  _leftDagger: {fileID: 0}
+  _rightDagger: {fileID: 0}
+  _throwableDagger: {fileID: 0}
 --- !u!95 &7465237384428354640
 Animator:
   serializedVersion: 7

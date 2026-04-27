@@ -49,9 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bow
   WeaponData: {fileID: 11400000, guid: f4601f352bfdcf34a971c2cffb6a3a4a, type: 2}
-  BaseDamage: 25
+  BaseDamage: 20
   Level: 0
-  _cooldown: 0
   animator: {fileID: 900697286842366753}
   _normalArrowPrefab: {fileID: 0}
   _specialArrowPrefab: {fileID: 0}

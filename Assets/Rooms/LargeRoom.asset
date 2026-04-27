@@ -25,3 +25,5 @@ MonoBehaviour:
     soRoom: {fileID: 11400000, guid: 245e338088c165645aea306562146a4c, type: 2}
   - Weight: 1
     soRoom: {fileID: 11400000, guid: 5932d12f8b8a6f24fb8f85f7fbb04960, type: 2}
+  MinEnemyWeight: 12
+  MaxEnemyWeight: 20

@@ -351,28 +351,10 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void GoToNewDungeon()
     {
-        
+        generatedMaxBaseRooms++;
+        GenerateMap();
     }
-
-    /*
-    private void DrawMap(Tilemap map, TileBase tile, List<Vector2Int> generatedPositions)
-    {
-        map.ClearAllTiles();
-
-        foreach (Vector2Int position in generatedPositions)
-        {
-            map.SetTile(new Vector3Int(position.x, position.y, 0), tile);
-        }
-    }
-
-    private void DrawMap(Tilemap map, TileBase tile, BoundsInt positions)
-    {
-        foreach (Vector3Int position in positions.allPositionsWithin)
-        {
-            map.SetTile(position, tile);
-        }
-    }*/
 
 }
