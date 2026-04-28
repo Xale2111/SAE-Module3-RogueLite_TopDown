@@ -17,5 +17,5 @@ MonoBehaviour:
   name: Boss
   Links: []
   BonusRoomLinks: []
-  MinEnemyWeight: 30
+  MinEnemyWeight: 25
   MaxEnemyWeight: 30

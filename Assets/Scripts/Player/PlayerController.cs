@@ -34,7 +34,10 @@ public class PlayerController : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
+    {        
+        UnityEngine.Cursor.visible = false;
+        
+
         rb = GetComponent<Rigidbody2D>();
         hp = maxHp;
         

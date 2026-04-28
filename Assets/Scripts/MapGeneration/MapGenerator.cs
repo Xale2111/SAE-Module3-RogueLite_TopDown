@@ -161,8 +161,6 @@ public class MapGenerator : MonoBehaviour
 
         #endregion
         
-        RoomManager.roomsBounds = normalRooms;
-
         //Generating corridors
         for (int i = 0; i < normalRooms.Count-1; i++)
         {
@@ -355,6 +353,11 @@ public class MapGenerator : MonoBehaviour
     {
         generatedMaxBaseRooms++;
         GenerateMap();
+    }
+
+    public List<NormalRoom> GetNormalRooms()
+    {
+        return normalRooms;
     }
 
 }

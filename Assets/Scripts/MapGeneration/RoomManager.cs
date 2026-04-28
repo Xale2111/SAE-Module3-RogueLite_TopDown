@@ -29,6 +29,10 @@ public class RoomManager : MonoBehaviour
         {
             mapGenerator = FindFirstObjectByType<MapGenerator>();
         }
+
+        roomsBounds = mapGenerator.GetNormalRooms();
+        currentRoom = 0;
+        nextRoom = 1;
     }
 
     private void Update()
@@ -83,6 +87,7 @@ public class RoomManager : MonoBehaviour
     {
         playerController.SendPlayerToStartPosition();
         mapGenerator.GoToNewDungeon();
+        roomsBounds = mapGenerator.GetNormalRooms();
         playerController.HealPlayerOfPercentage(30);
         playerController.UpgradeMaxHP(25);
         currentRoom = 0;

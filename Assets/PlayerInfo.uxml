@@ -36,9 +36,13 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="GoldInfo" style="flex-grow: 0; width: 10%; height: auto; align-content: flex-end; justify-content: flex-end; align-self: auto; background-color: rgba(255, 231, 90, 0.24); aspect-ratio: 1;"/>
-        <ui:VisualElement name="Timer" style="flex-grow: 0; width: 15%; height: auto; align-content: auto; justify-content: flex-start; align-self: auto; background-color: rgba(40, 34, 39, 0.5); aspect-ratio: auto; align-items: auto; margin-left: auto; flex-direction: column-reverse;">
-            <ui:Label text="XX : XX&#10;" style="align-self: center; justify-content: flex-start; align-content: flex-end; align-items: flex-end; -unity-text-align: middle-center; width: 100%; font-size: 28px; color: rgb(235, 235, 235);"/>
+        <ui:VisualElement name="GoldInfo" style="flex-grow: 0; width: 10%; height: auto; align-content: flex-end; justify-content: flex-end; align-self: auto; background-color: rgba(255, 231, 90, 0); aspect-ratio: 1;"/>
+        <ui:VisualElement name="Timer" style="flex-grow: 0; width: 10%; height: auto; align-content: auto; justify-content: flex-start; align-self: auto; background-color: rgba(40, 34, 39, 0.5); aspect-ratio: auto; align-items: auto; margin-left: auto; flex-direction: column-reverse;">
+            <ui:Label text="XX : XX : XX&#10;" name="TimerValue" data-source-type="UITimer, Assembly-CSharp" style="align-self: center; justify-content: flex-start; align-content: flex-end; align-items: flex-end; -unity-text-align: middle-left; width: 80%; font-size: 16px; color: rgb(235, 235, 235);">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="timerText" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:Label>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
