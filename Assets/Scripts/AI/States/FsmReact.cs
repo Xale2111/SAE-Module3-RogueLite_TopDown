@@ -8,11 +8,12 @@ namespace FSM.States
         {
             Debug.Log("REACTING TO PLAYER");
             Context.StopMove();
-            Context.LookAt(Context.GetPlayerTransform.position-Context.SelfTransform.position);
+            Context.LaunchReactAnimation();
         }
 
         public void Tick()
         {            
+            Context.LookAt(Context.GetPlayerTransform.position-Context.SelfTransform.position);
         }
 
         public void Exit()

@@ -12,6 +12,7 @@ public class Context : MonoBehaviour
     private PlayerController _player;    
     private Rigidbody2D _rigidbody;
     private Animator _animator;
+    private CameraShakeManager _cameraShakeManager;
 
     public float HitTime => _hitTime;
     public Transform GetPlayerTransform => _player.transform;
@@ -60,17 +61,37 @@ public class Context : MonoBehaviour
     {
         _animator.SetTrigger("Attack");
     }
+    
+    public void LaunchReactAnimation()
+    {
+        Debug.Log("Reacting animation");
+        _animator.SetTrigger("React");
+    }
+    
+    public void LaunchHitAnimation()
+    {
+        Debug.Log("Hit animation");
+        _cameraShakeManager.ShakeCameraEnemyHit();       
+        _animator.SetTrigger("Hit");
+    }
 
     public bool IsPlayingAttackAnimation()
     {
         if(_animator && _animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
                         _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
-        {
             return true;
-        }
+        
          else 
             return false;
+    }
 
+    public bool IsPlayingReactAnimation()
+    {
+        if(_animator && _animator.GetCurrentAnimatorStateInfo(0).IsName("React") &&
+           _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+            return true;
+        else 
+            return false;
     }
 
     private void OnEnable()
@@ -78,6 +99,7 @@ public class Context : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _player = FindFirstObjectByType<PlayerController>();
+        _cameraShakeManager = FindFirstObjectByType<CameraShakeManager>();
         if (!_enemyInstance)
         {         
             _enemyInstance = GetComponent<EnemyInstance>();        

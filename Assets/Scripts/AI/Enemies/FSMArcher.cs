@@ -16,7 +16,7 @@ namespace FSM
         protected FsmChase _chase = new FsmChase();
         protected FsmAttack _attack = new FsmAttack();
         protected FsmFlee _flee = new FsmFlee();
-        bool attackAnimationIsPlayer => _context.IsPlayingAttackAnimation();
+        bool attackAnimationIsPlaying => _context.IsPlayingAttackAnimation();
 
 
         protected override void OnStart()
@@ -30,8 +30,8 @@ namespace FSM
             _fsmMachine.AddTransition(_idle, () => true, _patrol);
             _fsmMachine.AddTransition(_patrol, () => CheckPlayerSeen() && !_sawPlayerOnce, _react);
 
-            _fsmMachine.AddTransition(_react, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _flee);
-            _fsmMachine.AddTransition(_react, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius) && !_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _chase);
+            _fsmMachine.AddTransition(_react, () => !_reactAnimationIsPlaying && _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _flee);
+            _fsmMachine.AddTransition(_react, () => !_reactAnimationIsPlaying && _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius) && !_context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _chase);
 
             _fsmMachine.AddTransition(_patrol, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange) && _sawPlayerOnce, _flee);
             _fsmMachine.AddTransition(_flee, () => !_context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _patrol);
@@ -45,14 +45,14 @@ namespace FSM
 
             _fsmMachine.AddTransition(_chase, ()=>_context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange), _attack);
             
-            _fsmMachine.AddTransition(_attack, ()=> !attackAnimationIsPlayer && !_context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange) && _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _chase);
-            _fsmMachine.AddTransition(_attack, ()=>!attackAnimationIsPlayer && _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _flee);
-            _fsmMachine.AddTransition(_attack, ()=> !attackAnimationIsPlayer && !_context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _patrol);            
+            _fsmMachine.AddTransition(_attack, ()=> !attackAnimationIsPlaying && !_context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange) && _context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _chase);
+            _fsmMachine.AddTransition(_attack, ()=>!attackAnimationIsPlaying && _context.CheckPlayerInGivenRange(_context.EnemyStat.FleeRange), _flee);
+            _fsmMachine.AddTransition(_attack, ()=> !attackAnimationIsPlaying && !_context.CheckPlayerInGivenRange(_context.EnemyStat.DetectionRadius), _patrol);            
         }
 
         public void ShootArrow()
         {
-            Vector3 direction = _context.GetPlayerTransform.position - _context.SelfTransform.position;
+            Vector3 direction = _context.SelfTransform.up;
 
             // Pour un jeu 2D, calculer l'angle avec Atan2
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;

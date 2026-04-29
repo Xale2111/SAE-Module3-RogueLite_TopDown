@@ -26,7 +26,7 @@ namespace FSM
             
             _fsmMachine.AddTransition(_idle, () => true, _patrol);
             _fsmMachine.AddTransition(_patrol, () => CheckPlayerSeen() && !_sawPlayerOnce, _react); //IF PLAYER IN CHASE RANGE && KNOW PLAYER == FALSE
-            _fsmMachine.AddTransition(_react, () => true, _chase); //CHECK ANIMATION COMPLETE + MAKE KNOW PLAYER TRUE : TODO ADD ANIMATION CHECK
+            _fsmMachine.AddTransition(_react, () => !_reactAnimationIsPlaying, _chase); //CHECK ANIMATION COMPLETE + MAKE KNOW PLAYER TRUE : TODO ADD ANIMATION CHECK
             _fsmMachine.AddTransition(_patrol, () => CheckPlayerSeen() && _sawPlayerOnce, _chase); //IF PLAYER IN CHASE RANGE AND KNOW PLAYER == TRUE
             _fsmMachine.AddTransition(_chase, () => !CheckPlayerSeen(), _patrol); //LOST PLAYER
             _fsmMachine.AddTransition(_chase, () => _context.CheckPlayerInGivenRange(_context.EnemyStat.AttackRange), _attack); //IF PLAYER IN ATTACK RANGE

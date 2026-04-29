@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -15,6 +16,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UIDocument playerDataUI;
 
     [SerializeField] private Transform startPosition;
+
+    public bool Interacted = false;
+    public bool IsProtected = false;
+    
+    [SerializeField] private UnityEvent OnHit;
     
     private Rigidbody2D rb;
     private float _interactCooldown = 0.5f;
@@ -26,17 +32,15 @@ public class PlayerController : MonoBehaviour
 
     Vector2 move;
 
-    public bool Interacted = false;
+
     private bool _canInteract = true;
 
     private bool _isInvincible = false;
-    public bool IsProtected = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {        
         UnityEngine.Cursor.visible = false;
-        
 
         rb = GetComponent<Rigidbody2D>();
         hp = maxHp;
@@ -110,6 +114,7 @@ public class PlayerController : MonoBehaviour
             hp -= damageToDeal;
             UpdateHealthBar();
             StartCoroutine(InvincibilityFrames());
+            OnHit.Invoke(); 
         }
     }
 

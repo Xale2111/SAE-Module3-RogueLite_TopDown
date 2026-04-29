@@ -11,6 +11,7 @@ namespace FSM.States
         public void Enter()
         {
             _patrolPoint = GetNewPatrolPoint();
+            Debug.Log("PATROLING");
         }
 
         public void Tick()

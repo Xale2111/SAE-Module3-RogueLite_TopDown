@@ -1,4 +1,6 @@
-﻿namespace FSM.States
+﻿using UnityEngine;
+
+namespace FSM.States
 {
     public class FsmIdle : IState
     {

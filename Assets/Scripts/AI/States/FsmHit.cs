@@ -9,6 +9,7 @@ namespace FSM.States
         public void Enter()
         {
             timer = 0;            
+            Context.LaunchHitAnimation();
         }
 
         public void Tick()
@@ -17,6 +18,7 @@ namespace FSM.States
             if (timer > Context.HitTime)
             {
                 Debug.Log("HIT");
+                
                 timer = 0;
                 Context.EnemyInstance.IsBeingHit = false;
             }

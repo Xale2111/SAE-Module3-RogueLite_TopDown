@@ -16,6 +16,7 @@ namespace FSM
         protected FsmReact _react = new FsmReact();
 
         protected bool _sawPlayerOnce = false;
+        protected bool _reactAnimationIsPlaying => _context.IsPlayingReactAnimation();
 
         private void Start()
         {
