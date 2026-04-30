@@ -30,6 +30,11 @@ public class PlayerController : MonoBehaviour
 
     private VisualElement hpBarValue;
 
+    private Label _gainHealthElement;
+    private Label _loseHealthElement;
+    private Label _gainMaxHealthElement;
+    
+
     Vector2 move;
 
 
@@ -49,6 +54,14 @@ public class PlayerController : MonoBehaviour
         playerHealth.dataSource = this;
         
         hpBarValue = playerDataUI.rootVisualElement.Query("HPBar_Value").First();
+        
+        _gainHealthElement = playerDataUI.rootVisualElement.Q<Label>("GainHealth");
+        _loseHealthElement = playerDataUI.rootVisualElement.Q<Label>("LoseHealth");
+        _gainMaxHealthElement = playerDataUI.rootVisualElement.Q<Label>("GainMaxHealth");
+        
+        _gainHealthElement.style.opacity = 0;
+        _loseHealthElement.style.opacity = 0;
+        _gainMaxHealthElement.style.opacity = 0;
         
         UpdateHealthBar();
         SendPlayerToStartPosition();
@@ -103,7 +116,6 @@ public class PlayerController : MonoBehaviour
             {
                 Interacted = false;
             }
-            
         }
     }
 
@@ -113,7 +125,9 @@ public class PlayerController : MonoBehaviour
         {
             hp -= damageToDeal;
             UpdateHealthBar();
+            _loseHealthElement.text = "-" + damageToDeal + " HP";
             StartCoroutine(InvincibilityFrames());
+            StartCoroutine(DisplayHealthData(_loseHealthElement));
             OnHit.Invoke(); 
         }
     }
@@ -153,10 +167,26 @@ public class PlayerController : MonoBehaviour
 
     public void HealPlayerOfPercentage(float percentage)
     {
-        hp += Mathf.RoundToInt((float)maxHp * (percentage / 100));
-        if (hp > maxHp)
-        { 
-            hp = maxHp;
+        int gainedHp = Mathf.RoundToInt((float)maxHp * (percentage / 100));
+        hp += gainedHp;
+        
+        HealPlayerOf(gainedHp);
+        
+    }
+
+    public void HealPlayerOf(int hpToGain)
+    {
+        if (hp + hpToGain > maxHp)
+        {
+            hpToGain = maxHp - hp;
+        }
+        
+        hp += hpToGain;
+        
+        _gainHealthElement.text = "+" + hpToGain + " HP";
+        if (hpToGain > 0)
+        {
+            StartCoroutine(DisplayHealthData(_gainHealthElement));
         }
 
         UpdateHealthBar();
@@ -165,12 +195,24 @@ public class PlayerController : MonoBehaviour
     public void UpgradeMaxHP(int hpToAdd)
     {
         maxHp += hpToAdd;
-        hp += hpToAdd;
-        if (hp > maxHp)
-        {
-            hp = maxHp;
-        }
-
+        HealPlayerOf(hpToAdd);
+        
+        _gainMaxHealthElement.text = "+" + hpToAdd + " Max HP";
+        StartCoroutine(DisplayHealthData(_gainMaxHealthElement));
+        
         UpdateHealthBar();
+    }
+
+    private IEnumerator DisplayHealthData(VisualElement healthData)
+    {
+        healthData.style.opacity = 1;
+        do
+        {
+            yield return new WaitForSeconds(.2f);
+            healthData.style.opacity = healthData.style.opacity.value - .12f;
+            
+        } while (healthData.style.opacity.value > 0.2f);
+        healthData.style.opacity = 0;
+        
     }
 }
