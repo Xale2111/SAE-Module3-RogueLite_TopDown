@@ -15,8 +15,7 @@ MonoBehaviour:
   type: 0
   sizeType: {fileID: 11400000, guid: 3e5d4ab88d9e96243af49111fbb12611, type: 2}
   name: PlayGround
-  ID: 0
   Links: []
-  BonusRoomLinks:
-  - Weight: 10
-    soRoom: {fileID: 11400000, guid: 5932d12f8b8a6f24fb8f85f7fbb04960, type: 2}
+  BonusRoomLinks: []
+  MinEnemyWeight: 25
+  MaxEnemyWeight: 25

@@ -18,8 +18,12 @@
 }
 
 .MenuButton:hover {
-    transition-duration: 0.2s;
-    transition-delay: 0.2s;
+    transition-duration: 0.1s;
+    transition-delay: 0.05s;
     transition-timing-function: ease-in-out;
-    opacity: 0.8;
+    opacity: 0.5;
+}
+
+.HTP_Text {
+    color: rgb(255, 255, 255);
 }

@@ -100,6 +100,7 @@ public class Context : MonoBehaviour
         _animator = GetComponent<Animator>();
         _player = FindFirstObjectByType<PlayerController>();
         _cameraShakeManager = FindFirstObjectByType<CameraShakeManager>();
+        
         if (!_enemyInstance)
         {         
             _enemyInstance = GetComponent<EnemyInstance>();        
